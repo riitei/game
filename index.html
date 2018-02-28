@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>demo</title>
+    <style type="text/css">
+        .active {
+            position: absolute;
+            padding-left: 250px;
+            padding-top: 250px;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+
+        var map = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
+        var vertical = map.length;
+        var horizontal = map[vertical - 1].length;
+        var centerVertical = Math.floor(vertical / 2);
+        var centerHorizontal = Math.floor(horizontal / 2);
+        var x = 0;//水平方向位移
+        var y = 0;//垂直方向位移
+        var pathVertical = [];
+        var pathHorizontal = [];
+        var pathX = [];
+        var pathY = [];
+        $(document).keydown(function (event) {
+            switch (event.which) {
+                case 37:
+                    if (centerHorizontal > 0 && map[centerVertical][centerHorizontal] == 0) {
+                        centerHorizontal -= 1;
+                        // if (map[centerVertical][centerHorizontal] == 0) {
+                        y = y - 30;
+                        $("#person").css("left", y + "px");
+                        //
+                        console.log("left 左" + y);
+                        console.log(centerVertical + "," + centerHorizontal);
+                        // }else{
+                        //     // $("#person").css("left", y + "px");
+                        //     //
+                        //     console.log("left 左" + y);
+                        //     console.log(centerVertical + "," + centerHorizontal);
+                        // }
+                        // pathY.push(y);
+                        // pathHorizontal.push(centerHorizontal);
+
+                    }
+                    break;
+                case 38:
+                    if (centerVertical > 0 && map[centerVertical][centerHorizontal] == 0) {
+                        centerVertical -= 1;
+                        // if (map[centerVertical][centerHorizontal] == 0 ) {
+                        x = x - 30;
+                        $("#person").css("top", x + "px");
+                        //
+                        console.log("top 上 " + x);
+                        console.log(centerVertical + "," + centerHorizontal);
+                        // } else {
+                        //     // $("#person").css("top", x + "px");
+                        //     //
+                        //     console.log("top 上 " + x);
+                        //     console.log(centerVertical + "," + centerHorizontal);
+                        // }
+                        // pathX.push(x);
+                        // pathVertical.push(centerVertical);
+                    }
+                    break;
+                case 39:
+                    if (centerHorizontal < horizontal - 1 && map[centerVertical][centerHorizontal] == 0) {
+                        centerHorizontal += 1;
+                        // if (map[centerVertical][centerHorizontal] == 0) {
+                        y = y + 30;
+                        $("#person").css("left", y + "px");
+                        //
+                        console.log("left 右" + y);
+                        console.log(centerVertical + "," + centerHorizontal);
+                        //  }  else {
+
+                        //     // $("#person").css("left", y + "px");
+                        //     //
+                        //     console.log("left 右" + y);
+                        //     console.log(centerVertical + "," + centerHorizontal);
+                        // }
+                        // pathY.push(y);
+                        // pathHorizontal.push(centerHorizontal);
+                    }
+
+                    break;
+                case 40:
+                    if (centerVertical < vertical - 1 && map[centerVertical][centerHorizontal] == 0) {
+                        centerVertical += 1;
+                        // if (map[centerVertical][centerHorizontal] == 0 && map[centerVertical][centerHorizontal] == 0) {
+                        x = x + 30;
+                        $("#person").css("top", x + "px");
+                        //
+                        console.log("top 下 " + x);
+                        console.log(centerVertical + "," + centerHorizontal);
+                        // } else {
+                        //     // $("#person").css("top", x + "px");
+                        //     //
+                        //     console.log("top 下 " + x);
+                        //     console.log(centerVertical + "," + centerHorizontal);
+                        // }
+
+                        // pathX.push(x);
+                        // pathVertical.push(centerVertical);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+    </script>
+
+</head>
+<body>
+<div id="person" class="active">
+    <img src="01.jpg" width="50px" height="50px">
+</div>
+
+</body>
+</html>
