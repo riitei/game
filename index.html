@@ -27,84 +27,46 @@
         var pathY = [];
         $(document).keydown(function (event) {
             switch (event.which) {
-                case 37:
+                case 37:// 鍵盤 左按鍵
                     if (centerHorizontal > 0 && map[centerVertical][centerHorizontal] == 0) {
                         centerHorizontal -= 1;
-                        // if (map[centerVertical][centerHorizontal] == 0) {
                         y = y - 30;
                         $("#person").css("left", y + "px");
                         //
                         console.log("left 左" + y);
                         console.log(centerVertical + "," + centerHorizontal);
-                        // }else{
-                        //     // $("#person").css("left", y + "px");
-                        //     //
-                        //     console.log("left 左" + y);
-                        //     console.log(centerVertical + "," + centerHorizontal);
-                        // }
-                        // pathY.push(y);
-                        // pathHorizontal.push(centerHorizontal);
-
                     }
                     break;
-                case 38:
+                case 38:// 鍵盤 上按鍵
                     if (centerVertical > 0 && map[centerVertical][centerHorizontal] == 0) {
                         centerVertical -= 1;
-                        // if (map[centerVertical][centerHorizontal] == 0 ) {
                         x = x - 30;
                         $("#person").css("top", x + "px");
                         //
                         console.log("top 上 " + x);
                         console.log(centerVertical + "," + centerHorizontal);
-                        // } else {
-                        //     // $("#person").css("top", x + "px");
-                        //     //
-                        //     console.log("top 上 " + x);
-                        //     console.log(centerVertical + "," + centerHorizontal);
-                        // }
-                        // pathX.push(x);
-                        // pathVertical.push(centerVertical);
                     }
                     break;
-                case 39:
+                case 39:// 鍵盤 右按鍵
                     if (centerHorizontal < horizontal - 1 && map[centerVertical][centerHorizontal] == 0) {
                         centerHorizontal += 1;
-                        // if (map[centerVertical][centerHorizontal] == 0) {
                         y = y + 30;
                         $("#person").css("left", y + "px");
                         //
                         console.log("left 右" + y);
                         console.log(centerVertical + "," + centerHorizontal);
-                        //  }  else {
-
-                        //     // $("#person").css("left", y + "px");
-                        //     //
-                        //     console.log("left 右" + y);
-                        //     console.log(centerVertical + "," + centerHorizontal);
-                        // }
-                        // pathY.push(y);
-                        // pathHorizontal.push(centerHorizontal);
                     }
 
                     break;
-                case 40:
+                case 40:// 鍵盤 下按鍵
                     if (centerVertical < vertical - 1 && map[centerVertical][centerHorizontal] == 0) {
                         centerVertical += 1;
-                        // if (map[centerVertical][centerHorizontal] == 0 && map[centerVertical][centerHorizontal] == 0) {
                         x = x + 30;
                         $("#person").css("top", x + "px");
                         //
                         console.log("top 下 " + x);
                         console.log(centerVertical + "," + centerHorizontal);
-                        // } else {
-                        //     // $("#person").css("top", x + "px");
-                        //     //
-                        //     console.log("top 下 " + x);
-                        //     console.log(centerVertical + "," + centerHorizontal);
-                        // }
 
-                        // pathX.push(x);
-                        // pathVertical.push(centerVertical);
                     }
                     break;
                 default:
