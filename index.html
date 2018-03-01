@@ -7,71 +7,87 @@
     <style type="text/css">
         .active {
             position: absolute;
-            padding-left: 250px;
-            padding-top: 250px;
+            top: 150px; /* 圖片初始位置 陣列 欄 Vertical 陣列 map[5][0] => 5 * 30px = 150px */
+            left: 0px; /* 圖片初始位置 陣列 欄 Horizontal 陣列 map[5][0] => 0 * 30px = 0px */
+            padding-left: 60px;
+            padding-top: 60px;
         }
     </style>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
 
-        var map = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
-        var vertical = map.length;
-        var horizontal = map[vertical - 1].length;
-        var centerVertical = Math.floor(vertical / 2);
-        var centerHorizontal = Math.floor(horizontal / 2);
-        var x = 0;//水平方向位移
-        var y = 0;//垂直方向位移
-        var pathVertical = [];
-        var pathHorizontal = [];
-        var pathX = [];
-        var pathY = [];
+        var map = [
+            [0, 0, 0, 0, 0],
+            [0, 1, 0, 1, 0],
+            [0, 1, 0, 1, 0],
+            [0, 1, 0, 1, 0],
+            [1, 1, 0, 1, 0],
+            [0, 0, 0, 1, 0]];
+        // map陣列值為 0 可以圖片通行
+        // map陣列值為 1 可以圖片通行
+        var verticalLength = map.length;// 欄
+        var horizontalLength = map[map.length - 1].length;// 列
+
+        var vertical = 5;// 圖片初始位置 陣列 欄
+        var horizontal = 0;// 圖片初始位置 陣列 列
+
+
         $(document).keydown(function (event) {
             switch (event.which) {
                 case 37:// 鍵盤 左按鍵
-                    if (centerHorizontal > 0 && map[centerVertical][centerHorizontal] == 0) {
-                        centerHorizontal -= 1;
-                        y = y - 30;
-                        $("#person").css("left", y + "px");
+                    if (horizontal > 0) {
+                        horizontal -= 1; // 陣列向左移動
+                        if (map[vertical][horizontal] == 0) { // 可以通行
+                            $("#person").css("left", horizontal * 30 + "px");
+                        } else {
+                            horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
+                        }
                         //
-                        console.log("left 左" + y);
-                        console.log(centerVertical + "," + centerHorizontal);
+                        console.log(vertical + "," + horizontal);
                     }
                     break;
                 case 38:// 鍵盤 上按鍵
-                    if (centerVertical > 0 && map[centerVertical][centerHorizontal] == 0) {
-                        centerVertical -= 1;
-                        x = x - 30;
-                        $("#person").css("top", x + "px");
+                    if (vertical > 0) {
+                        vertical -= 1;// 陣列向上移動
+                        if (map[vertical][horizontal] == 0) {// 可以通行
+                            $("#person").css("top", vertical * 30 + "px");
+                        } else {
+                            vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
+                        }
                         //
-                        console.log("top 上 " + x);
-                        console.log(centerVertical + "," + centerHorizontal);
+                        console.log(vertical + "," + horizontal);
                     }
                     break;
                 case 39:// 鍵盤 右按鍵
-                    if (centerHorizontal < horizontal - 1 && map[centerVertical][centerHorizontal] == 0) {
-                        centerHorizontal += 1;
-                        y = y + 30;
-                        $("#person").css("left", y + "px");
+                    if (horizontal < horizontalLength - 1) {
+                        horizontal += 1;// 陣列向右移動
+                        if (map[vertical][horizontal] == 0) {// 可以通行
+                            $("#person").css("left", horizontal * 30 + "px");
+                        } else {
+                            horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
+                        }
                         //
-                        console.log("left 右" + y);
-                        console.log(centerVertical + "," + centerHorizontal);
+                        console.log(vertical + "," + horizontal);
                     }
 
                     break;
                 case 40:// 鍵盤 下按鍵
-                    if (centerVertical < vertical - 1 && map[centerVertical][centerHorizontal] == 0) {
-                        centerVertical += 1;
-                        x = x + 30;
-                        $("#person").css("top", x + "px");
+                    if (vertical < verticalLength - 1) {
+                        vertical += 1;// 陣列向下移動
+                        if (map[vertical][horizontal] == 0) {// 可以通行
+                            $("#person").css("top", vertical * 30 + "px");
+                        } else {
+                            vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
+                        }
                         //
-                        console.log("top 下 " + x);
-                        console.log(centerVertical + "," + centerHorizontal);
-
+                        console.log(vertical + "," + horizontal);
                     }
                     break;
                 default:
                     break;
             }
+
+
         });
     </script>
 
