@@ -33,11 +33,12 @@
     <script type="text/javascript">
         $(function () {
             var map = [
-                [0, 1, 0],
-                [1, 0, 1],
-                [0, 1, 0],
-                [0, 0, 0]
-            ];
+                [0, 0, 0, 0, 0],
+                [0, 1, 0, 1, 0],
+                [0, 1, 0, 1, 0],
+                [0, 1, 0, 1, 0],
+                [1, 1, 0, 1, 0],
+                [0, 0, 0, 0, 0]];
             var mapHeight = map.length;
             $("#map").css("height", mapHeight * 100);// 透過陣列 橫 得知地圖最大高度範圍
             var mapWidth = map[mapHeight - 1].length;

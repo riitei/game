@@ -7,10 +7,38 @@
     <style type="text/css">
         .active {
             position: absolute;
-            top: 150px; /* 圖片初始位置 陣列 欄 Vertical 陣列 map[5][0] => 5 * 30px = 150px */
-            left: 0px; /* 圖片初始位置 陣列 欄 Horizontal 陣列 map[5][0] => 0 * 30px = 0px */
-            padding-left: 60px;
-            padding-top: 60px;
+            padding-left: 100px;
+            padding-top: 100px;
+        }
+
+        /*地圖範圍*/
+        .map {
+            position: absolute;
+            padding-top: 100px;
+            padding-left: 100px;
+            overflow: hidden;
+        }
+
+        /*通行*/
+        .pass {
+            height: 100px;
+            width: 100px;
+            background: yellow;
+            float: left;
+        }
+
+        /*障礙*/
+        .obstacle {
+            height: 100px;
+            width: 100px;
+            background: blueviolet;
+            float: left;
+        }
+
+        /*換行*/
+        .wrap {
+            height: 100px;
+            width: 100px;
         }
     </style>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
@@ -22,7 +50,7 @@
             [0, 1, 0, 1, 0],
             [0, 1, 0, 1, 0],
             [1, 1, 0, 1, 0],
-            [0, 0, 0, 1, 0]];
+            [0, 0, 0, 0, 0]];
         // map陣列值為 0 可以圖片通行
         // map陣列值為 1 可以圖片通行
         var verticalLength = map.length;// 欄
@@ -30,15 +58,37 @@
 
         var vertical = 5;// 圖片初始位置 陣列 欄
         var horizontal = 0;// 圖片初始位置 陣列 列
+        $(function () {
+            $("#person").css("top", vertical * 100);// 圖片初始位置 陣列 欄
+            $("#person").css("left", horizontal * 100);// 圖片初始位置 陣列 列
+            $("#map").css("height", verticalLength * 100);// 透過陣列 橫 得知地圖最大高度範圍
+            $("#map").css("width", (horizontalLength + 1) * 100);//透過陣列 列 得知地圖最大長度範圍
+            //
+            for (var i = 0; i < verticalLength; i++) {
+                for (var j = 0; j < horizontalLength; j++) {
+                    if (map[i][j] == 1) {
+                        $("#block").append("<div class='obstacle'>" + i + "," + j + "</div>");
+                        // 障礙物
+                    } else {
+                        $("#block").append("<div class='pass'>" + i + "," + j + "</div>");
+                        // 可通行
+                    }
+                }
+                $("#block").append("<div class='wrap'></div>"); // 換行
+            }
+
+
+        });
 
 
         $(document).keydown(function (event) {
+
             switch (event.which) {
                 case 37:// 鍵盤 左按鍵
                     if (horizontal > 0) {
                         horizontal -= 1; // 陣列向左移動
                         if (map[vertical][horizontal] == 0) { // 可以通行
-                            $("#person").css("left", horizontal * 30 + "px");
+                            $("#person").css("left", horizontal * 100 + "px");
                         } else {
                             horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
@@ -50,7 +100,7 @@
                     if (vertical > 0) {
                         vertical -= 1;// 陣列向上移動
                         if (map[vertical][horizontal] == 0) {// 可以通行
-                            $("#person").css("top", vertical * 30 + "px");
+                            $("#person").css("top", vertical * 100 + "px");
                         } else {
                             vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
                         }
@@ -62,7 +112,7 @@
                     if (horizontal < horizontalLength - 1) {
                         horizontal += 1;// 陣列向右移動
                         if (map[vertical][horizontal] == 0) {// 可以通行
-                            $("#person").css("left", horizontal * 30 + "px");
+                            $("#person").css("left", horizontal * 100 + "px");
                         } else {
                             horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
@@ -75,7 +125,7 @@
                     if (vertical < verticalLength - 1) {
                         vertical += 1;// 陣列向下移動
                         if (map[vertical][horizontal] == 0) {// 可以通行
-                            $("#person").css("top", vertical * 30 + "px");
+                            $("#person").css("top", vertical * 100 + "px");
                         } else {
                             vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
                         }
@@ -93,9 +143,17 @@
 
 </head>
 <body>
-<div id="person" class="active">
-    <img src="01.jpg" width="50px" height="50px">
-</div>
+<!--地圖-->
+<div id="map" class="map">
+
+    <!--圖片-->
+    <img id="person" class="map" src="01.jpg" width="100px" height="100px">
 
 </body>
+
+    <div id="block">
+    </div>
+
+</div>
+
 </html>
