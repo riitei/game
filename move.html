@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>demo</title>
+    <style type="text/css">
+        .active {
+            position: absolute;
+            padding-left: 100px;
+            padding-top: 100px;
+            /*top: 150px; !* 圖片初始位置 陣列 欄 Vertical 陣列 map[5][0] => 5 * 30px = 150px *!*/
+            /*left: 0px; !* 圖片初始位置 陣列 欄 Horizontal 陣列 map[5][0] => 0 * 30px = 0px *!*/
+        }
+
+    </style>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+
+        var map = [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0]];
+        // map陣列值為 0 可以圖片通行
+        // map陣列值為 1 可以圖片通行
+        var verticalLength = map.length;// 欄
+        var horizontalLength = map[map.length - 1].length;// 列
+
+        var vertical = 0;// 圖片初始位置 陣列 欄
+        var horizontal = 0;// 圖片初始位置 陣列 列
+        $(function () {
+            $("#person").css("top",vertical * 100);// 圖片初始位置 陣列 欄
+            $("#person").css("left",horizontal * 100);// 圖片初始位置 陣列 列
+        });
+
+
+        $(document).keydown(function (event) {
+
+            switch (event.which) {
+                case 37:// 鍵盤 左按鍵
+                    if (horizontal > 0) {
+                        horizontal -= 1; // 陣列向左移動
+                        if (map[vertical][horizontal] == 0) { // 可以通行
+                            $("#person").css("left", horizontal * 100 + "px");
+                        } else {
+                            horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
+                        }
+                        //
+                        console.log(vertical + "," + horizontal);
+                    }
+                    break;
+                case 38:// 鍵盤 上按鍵
+                    if (vertical > 0) {
+                        vertical -= 1;// 陣列向上移動
+                        if (map[vertical][horizontal] == 0) {// 可以通行
+                            $("#person").css("top", vertical * 100 + "px");
+                        } else {
+                            vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
+                        }
+                        //
+                        console.log(vertical + "," + horizontal);
+                    }
+                    break;
+                case 39:// 鍵盤 右按鍵
+                    if (horizontal < horizontalLength - 1) {
+                        horizontal += 1;// 陣列向右移動
+                        if (map[vertical][horizontal] == 0) {// 可以通行
+                            $("#person").css("left", horizontal * 100 + "px");
+                        } else {
+                            horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
+                        }
+                        //
+                        console.log(vertical + "," + horizontal);
+                    }
+
+                    break;
+                case 40:// 鍵盤 下按鍵
+                    if (vertical < verticalLength - 1) {
+                        vertical += 1;// 陣列向下移動
+                        if (map[vertical][horizontal] == 0) {// 可以通行
+                            $("#person").css("top", vertical * 100 + "px");
+                        } else {
+                            vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
+                        }
+                        //
+                        console.log(vertical + "," + horizontal);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
+        });
+    </script>
+
+</head>
+<body>
+
+<img id="person" class="active" src="01.jpg" width="100px" height="100px">
+
+
+</body>
+</html>
