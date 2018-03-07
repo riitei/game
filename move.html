@@ -9,6 +9,8 @@
             position: absolute;
             padding-left: 100px;
             padding-top: 100px;
+            height: 100px;
+            width: 100px;
             /*top: 150px; !* 圖片初始位置 陣列 欄 Vertical 陣列 map[5][0] => 5 * 30px = 150px *!*/
             /*left: 0px; !* 圖片初始位置 陣列 欄 Horizontal 陣列 map[5][0] => 0 * 30px = 0px *!*/
         }
@@ -29,65 +31,124 @@
         var verticalLength = map.length;// 欄
         var horizontalLength = map[map.length - 1].length;// 列
 
-        var vertical = 0;// 圖片初始位置 陣列 欄
-        var horizontal = 0;// 圖片初始位置 陣列 列
+        var vertical = 1;// 圖片初始位置 陣列 欄
+        var horizontal = 1;// 圖片初始位置 陣列 列
+        var count = 0;
         $(function () {
-            $("#person").css("top",vertical * 100);// 圖片初始位置 陣列 欄
-            $("#person").css("left",horizontal * 100);// 圖片初始位置 陣列 列
+            $("#start").css("top", vertical * 100);// 圖片初始位置 陣列 欄
+            $("#start").css("left", horizontal * 100);// 圖片初始位置 陣列 列
+            $("#top").css("top", vertical * 100);// 圖片初始位置 陣列 欄
+            $("#top").css("left", horizontal * 100);// 圖片初始位置 陣列 列
+            $("#down").css("top", vertical * 100);// 圖片初始位置 陣列 欄
+            $("#down").css("left", horizontal * 100);// 圖片初始位置 陣列 列
+            $("#left").css("top", vertical * 100);// 圖片初始位置 陣列 欄
+            $("#left").css("left", horizontal * 100);// 圖片初始位置 陣列 列
+            $("#right").css("top", vertical * 100);// 圖片初始位置 陣列 欄
+            $("#right").css("left", horizontal * 100);// 圖片初始位置 陣列 列
         });
 
 
         $(document).keydown(function (event) {
+            $("#start").css("display", "none");
+            $("#top").css("display", "none");
+            $("#down").css("display", "none");
+            $("#left").css("display", "none");
+            $("#right").css("display", "none");
 
             switch (event.which) {
                 case 37:// 鍵盤 左按鍵
                     if (horizontal > 0) {
+                        //
                         horizontal -= 1; // 陣列向左移動
                         if (map[vertical][horizontal] == 0) { // 可以通行
-                            $("#person").css("left", horizontal * 100 + "px");
+                            // 四個圖片同時移動
+                            $("#top").css("left", horizontal * 100 + "px");
+                            $("#down").css("left", horizontal * 100 + "px");
+                            $("#left").css("left", horizontal * 100 + "px");
+                            $("#right").css("left", horizontal * 100 + "px");
+                            //
+                            // $("#person").css("transform", "rotate(270deg)");
+                            // $("#person").css("-ms-transform", "rotate(270deg)");
+                            // $("#person").css("-moz-transform", "rotate(270deg)");
+                            // $("#person").css("-webkit-transform", "rotate(270deg)");
+                            // $("#person").css("-o-transform", "rotate(270deg)");
                         } else {
                             horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
                         //
                         console.log(vertical + "," + horizontal);
                     }
+                    // 顯上左邊圖片
+                    $("#left").css("display", "inline");
+
+
                     break;
                 case 38:// 鍵盤 上按鍵
                     if (vertical > 0) {
+                        //
                         vertical -= 1;// 陣列向上移動
                         if (map[vertical][horizontal] == 0) {// 可以通行
-                            $("#person").css("top", vertical * 100 + "px");
+                            // 四個圖片同時移動
+                            $("#top").css("top", vertical * 100 + "px");
+                            $("#down").css("top", vertical * 100 + "px");
+                            $("#left").css("top", vertical * 100 + "px");
+                            $("#right").css("top", vertical * 100 + "px");
+                            //
                         } else {
                             vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
                         }
                         //
                         console.log(vertical + "," + horizontal);
                     }
+                    // 顯上上面圖片
+                    $("#top").css("display", "inline");
+
                     break;
                 case 39:// 鍵盤 右按鍵
                     if (horizontal < horizontalLength - 1) {
+                        //
                         horizontal += 1;// 陣列向右移動
                         if (map[vertical][horizontal] == 0) {// 可以通行
-                            $("#person").css("left", horizontal * 100 + "px");
+                            // 四個圖片同時移動
+                            $("#top").css("left", horizontal * 100 + "px");
+                            $("#down").css("left", horizontal * 100 + "px");
+                            $("#left").css("left", horizontal * 100 + "px");
+                            $("#right").css("left", horizontal * 100 + "px");
+                            //
                         } else {
                             horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
                         //
                         console.log(vertical + "," + horizontal);
                     }
+                    // 顯上右邊圖片
+                    $("#right").css("display", "inline");
+
 
                     break;
                 case 40:// 鍵盤 下按鍵
                     if (vertical < verticalLength - 1) {
+                        // tempVertical = vertical;
+                        // tempHorizontal = horizontal;
+                        //
                         vertical += 1;// 陣列向下移動
                         if (map[vertical][horizontal] == 0) {// 可以通行
-                            $("#person").css("top", vertical * 100 + "px");
+                            // 四個圖片同時移動
+                            $("#top").css("top", vertical * 100 + "px");
+                            $("#down").css("top", vertical * 100 + "px");
+                            $("#left").css("top", vertical * 100 + "px");
+                            $("#right").css("top", vertical * 100 + "px");
+                            //
                         } else {
                             vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
                         }
                         //
+
                         console.log(vertical + "," + horizontal);
                     }
+                    // 顯上下面圖片
+                    $("#down").css("display", "inline");
+
                     break;
                 default:
                     break;
@@ -100,8 +161,12 @@
 </head>
 <body>
 
-<img id="person" class="active" src="01.jpg" width="100px" height="100px">
-
+<img id="start" class="active" src="photo/start.jpg">
+<img id="top" class="active" src="photo/top.png" style="display: none">
+<img id="down" class="active" src="photo/down.png" style="display: none">
+<img id="left" class="active" src="photo/left.png" style="display: none">
+<img id="right" class="active" src="photo/right.png" style="display: none">
+<img id="person" class="active" src="01.jpg" style="display: none">
 
 </body>
 </html>
