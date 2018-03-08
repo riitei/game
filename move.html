@@ -7,8 +7,8 @@
     <style type="text/css">
         .active {
             position: absolute;
-            padding-left: 100px;
-            padding-top: 100px;
+            margin-left: 100px;
+            margin-top: 100px;
             height: 100px;
             width: 100px;
             /*top: 150px; !* 圖片初始位置 陣列 欄 Vertical 陣列 map[5][0] => 5 * 30px = 150px *!*/
@@ -31,9 +31,9 @@
         var verticalLength = map.length;// 欄
         var horizontalLength = map[map.length - 1].length;// 列
 
-        var vertical = 1;// 圖片初始位置 陣列 欄
-        var horizontal = 1;// 圖片初始位置 陣列 列
-        var count = 0;
+        var vertical = 0;// 圖片初始位置 陣列 欄
+        var horizontal = 0;// 圖片初始位置 陣列 列
+
         $(function () {
             $("#start").css("top", vertical * 100);// 圖片初始位置 陣列 欄
             $("#start").css("left", horizontal * 100);// 圖片初始位置 陣列 列
@@ -67,11 +67,6 @@
                             $("#left").css("left", horizontal * 100 + "px");
                             $("#right").css("left", horizontal * 100 + "px");
                             //
-                            // $("#person").css("transform", "rotate(270deg)");
-                            // $("#person").css("-ms-transform", "rotate(270deg)");
-                            // $("#person").css("-moz-transform", "rotate(270deg)");
-                            // $("#person").css("-webkit-transform", "rotate(270deg)");
-                            // $("#person").css("-o-transform", "rotate(270deg)");
                         } else {
                             horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
