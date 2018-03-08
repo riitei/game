@@ -47,11 +47,7 @@
             switch (event.which) {
                 case 37:// 鍵盤 左按鍵
                     // 圖片選轉 270 度
-                    $("#top").css("transform", "rotate(270deg)");
-                    $("#top").css("-ms-transform", "rotate(270deg)");
-                    $("#top").css("-moz-transform", "rotate(270deg)");
-                    $("#top").css("-webkit-transform", "rotate(270deg)");
-                    $("#top").css("-o-transform", "rotate(270deg)");
+                    rotate(270);
                     //
                     if (horizontal > 0) {
                         //
@@ -70,7 +66,8 @@
 
                     break;
                 case 38:// 鍵盤 上按鍵
-                    //
+                    //  圖片選轉 0 度
+                    rotate(0);
                     if (vertical > 0) {
                         //
                         vertical -= 1;// 陣列向上移動
@@ -88,11 +85,7 @@
                     break;
                 case 39:// 鍵盤 右按鍵
                     // 圖片選轉 90 度
-                    $("#top").css("transform", "rotate(90deg)");
-                    $("#top").css("-ms-transform", "rotate(90deg)");
-                    $("#top").css("-moz-transform", "rotate(90deg)");
-                    $("#top").css("-webkit-transform", "rotate(90deg)");
-                    $("#top").css("-o-transform", "rotate(90deg)");
+                    rotate(90);
                     //
                     if (horizontal < horizontalLength - 1) {
                         //
@@ -110,11 +103,7 @@
                     break;
                 case 40:// 鍵盤 下按鍵
                     // 圖片選轉 180 度
-                    $("#top").css("transform", "rotate(180deg)");
-                    $("#top").css("-ms-transform", "rotate(180deg)");
-                    $("#top").css("-moz-transform", "rotate(180deg)");
-                    $("#top").css("-webkit-transform", "rotate(180deg)");
-                    $("#top").css("-o-transform", "rotate(180deg)");
+                    rotate(180);
                     //
                     if (vertical < verticalLength - 1) {
                         //
@@ -135,6 +124,14 @@
             }
 
         });
+        // 選轉圖片
+        function rotate(rotate) {
+            $("#top").css("transform", "rotate(" + rotate + "deg)");
+            $("#top").css("-ms-transform", "rotate(" + rotate + "deg)");
+            $("#top").css("-moz-transform", "rotate(" + rotate + "deg)");
+            $("#top").css("-webkit-transform", "rotate(" + rotate + "deg)");
+            $("#top").css("-o-transform", "rotate(" + rotate + "deg)");
+        }
     </script>
 
 </head>
