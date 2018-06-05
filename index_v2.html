@@ -6,7 +6,7 @@
     <title>demo</title>
     <style type="text/css">
         /*圖片*/
-        .photo{
+        .photo {
             position: absolute;
             margin-top: 100px;
             margin-left: 100px;
@@ -15,6 +15,7 @@
             height: 100px;
 
         }
+
         /*地圖範圍*/
         .map {
             position: absolute;
@@ -37,7 +38,7 @@
         .obstacle {
             height: 100px;
             width: 100px;
-            background: blueviolet;
+            /*background: blueviolet;*/
             float: left;
         }
 
@@ -66,15 +67,15 @@
             $("#top").css("left", horizontal * 100);// 圖片初始位置 陣列 列
             //
             $("#map").css("height", verticalLength * 100);// 透過陣列 橫 得知地圖最大高度範圍
-            $("#map").css("width", horizontalLength  * 100);//透過陣列 列 得知地圖最大長度範圍
+            $("#map").css("width", horizontalLength * 100);//透過陣列 列 得知地圖最大長度範圍
             //
             for (var i = 0; i < verticalLength; i++) {
                 for (var j = 0; j < horizontalLength; j++) {
                     if (map[i][j] == 1) {
-                        $("#block").append("<div class='obstacle'>" + i + "," + j + "</div>");
+                        $("#map").append("<img src='photo/obstacle.jpg' class='obstacle'> </img>");
                         // 障礙物
                     } else {
-                        $("#block").append("<div class='pass'>" + i + "," + j + "</div>");
+                        $("#map").append("<img src='photo/pass.jpg' class='pass'></img>");
                         // 可通行
                     }
                 }
@@ -92,16 +93,18 @@
                     // 圖片選轉 270 度
                     rotate(270);
                     //
-                    if (horizontal > 0) {
-                        //
+                    if (horizontal > 0) { // 防止超過界線
                         horizontal -= 1; // 陣列向左移動
-                        if (map[vertical][horizontal] == 0) { // 可以通行
-//
-                            $("#top").css("left", horizontal * 100 + "px");
-
-                        } else {
+                        var obstacle = move(map[vertical][horizontal], "left", horizontal, vertical);
+                        if (obstacle == true) {
                             horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
+                        //
+                        // if (map[vertical][horizontal] == 0) { // 可以通行
+                        //     $("#top").css("left", horizontal * 100 + "px");
+                        // } else {
+                        //     horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
+                        // }
                         //
                         console.log(vertical + "," + horizontal);
                     }
@@ -111,17 +114,22 @@
                 case 38:// 鍵盤 上按鍵
                     //  圖片選轉 0 度
                     rotate(0);
-                    if (vertical > 0) {
+                    if (vertical > 0) { // 防止超過界線
                         //
                         vertical -= 1;// 陣列向上移動
-                        if (map[vertical][horizontal] == 0) {// 可以通行
-                            //
-                            $("#top").css("top", vertical * 100 + "px");
 
-                        } else {
+                        var obstacle = move(map[vertical][horizontal], "top", horizontal, vertical);
+                        if (obstacle == true) {
                             vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
                         }
+
+                        // if (map[vertical][horizontal] == 0) {// 可以通行
+                        //     //
+                        //     $("#top").css("top", vertical * 100 + "px");
                         //
+                        // } else {
+                        //     vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
+                        // }
                         console.log(vertical + "," + horizontal);
                     }
 
@@ -130,15 +138,23 @@
                     // 圖片選轉 90 度
                     rotate(90);
                     //
-                    if (horizontal < horizontalLength - 1) {
+                    if (horizontal < horizontalLength - 1) { // 防止超過界線
                         //
                         horizontal += 1;// 陣列向右移動
-                        if (map[vertical][horizontal] == 0) {// 可以通行
-                            //
-                            $("#top").css("left", horizontal * 100 + "px");
-                        } else {
+
+                        var obstacle = move(map[vertical][horizontal], "left", horizontal, vertical);
+                        if (obstacle == true) {
                             horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
+
+
+
+                        // if (map[vertical][horizontal] == 0) {// 可以通行
+                        //     //
+                        //     $("#top").css("left", horizontal * 100 + "px");
+                        // } else {
+                        //     horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
+                        // }
                         //
                         console.log(vertical + "," + horizontal);
 
@@ -148,16 +164,25 @@
                     // 圖片選轉 180 度
                     rotate(180);
                     //
-                    if (vertical < verticalLength - 1) {
+                    if (vertical < verticalLength - 1) { // 防止超過界線
                         //
                         vertical += 1;// 陣列向下移動
-                        if (map[vertical][horizontal] == 0) {// 可以通行
-                            //
-                            $("#top").css("top", vertical * 100 + "px");
 
-                        } else {
+
+
+                        var obstacle = move(map[vertical][horizontal], "top", horizontal, vertical);
+                        if (obstacle == true) {
                             vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
                         }
+
+
+                        // if (map[vertical][horizontal] == 0) {// 可以通行
+                        //     //
+                        //     $("#top").css("top", vertical * 100 + "px");
+                        //
+                        // } else {
+                        //     vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
+                        // }
                         //
                         console.log(vertical + "," + horizontal);
                     }
@@ -167,6 +192,7 @@
             }
 
         });
+
         // 選轉圖片
         function rotate(rotate) {
             $("#top").css("transform", "rotate(" + rotate + "deg)");
@@ -174,6 +200,24 @@
             $("#top").css("-moz-transform", "rotate(" + rotate + "deg)");
             $("#top").css("-webkit-transform", "rotate(" + rotate + "deg)");
             $("#top").css("-o-transform", "rotate(" + rotate + "deg)");
+        }
+
+        // 圖片移動
+        function move(map, direction, horizontal, vertical) {
+            if (map == 0) { // 可以通行
+                switch (direction) {
+                    case "left":// 左
+                        console.log("01.左 右 "+direction+" horizontal "+horizontal);
+                        $("#top").css("left", horizontal * 100 + "px");
+                        break;
+                    case "top":// 上
+                        console.log("02.上 下 "+direction+" vertical "+vertical);
+                        $("#top").css("top", vertical * 100 + "px");
+                        break;
+                }
+            } else {
+                return true;
+            }
         }
     </script>
 
@@ -186,8 +230,10 @@
     <!--圖片-->
     <img id="start" class="photo" src="photo/start.jpg">
     <img id="top" class="photo" src="photo/top.png" style="display: none">
-    <!--區塊-->
-    <div id="block"></div>
+    <!--&lt;!&ndash;區塊 可通行&ndash;&gt;-->
+    <!--<img src="photo/pass.jpg" class="pass" style="display: none">-->
+    <!--&lt;!&ndash;區塊 不可通行&ndash;&gt;-->
+    <!--<img src="photo/obstacle.jpg" class="obstacle" style="display: none">-->
 </div>
 </body>
 </html>

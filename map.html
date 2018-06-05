@@ -6,13 +6,13 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <style type="text/css">
         .parameter {
-            margin-top: 100px;
-            margin-left: 100px;
+            padding-top: 100px;
+            padding-left: 100px;
         }
 
         .map {
-            margin-top: 100px;
-            margin-left: 100px;
+            padding-top: 100px;
+            padding-left: 100px;
 
         }
 
@@ -24,46 +24,115 @@
             float: left;
         }
 
+        .save {
+            padding-top: 100px;
+            padding-left: 100px;
+            /*float: none;*/
+        }
+
     </style>
 </head>
 <body>
-
 <div class="parameter">
     <form id="parameter">
-        水平 列：<input id="vertical" type="text"><br>
-        垂直 橫：<input id="horizontal" type="text"><br>
+        水平 欄：<input id="horizontal" type="text"><br>
+        垂直 列：<input id="vertical" type="text"><br>
         <input type="button" value="送出">
     </form>
 </div>
+<br>
 <div id="map" class="map">
-    <!--<div id="block" class="block"></div>-->
-    <div id="11" class="block" ></div>
+    <!--<div id="block"></div>-->
+    <!--<div id="1" class="block"></div>-->
+    <!--<div id="2" class="block"></div>-->
 </div>
-<script>
-    $("#a11").onmousedown(function () {
-        alert("yan");
-        $("#11").css("background","black");
-    });
-</script>
+<!--<br>-->
+<!--<div class="save">-->
+<!--<input id="save" type="button" value="儲存">-->
+<!--</div>-->
 
+
+<!--<script>-->
+<!--var arr = [0, 0, 0, 0, 0, 0];-->
+<!--for (var key in arr) {-->
+<!--// console.log(key);-->
+<!--}-->
+<!--var count1 = 0;-->
+<!--var count2 = 0;-->
+
+<!--$("#1").click(function () {-->
+
+<!--if (count1 % 2 == 0) {-->
+<!--$("#1").css("background", "black");-->
+<!--arr[1] = 1;-->
+<!--} else {-->
+<!--$("#1").css("background", "yellow");-->
+<!--arr[1] = 0;-->
+<!--}-->
+<!--count1++;-->
+<!--});-->
+
+<!--$("#2").click(function () {-->
+
+<!--if (count2 % 2 == 0) {-->
+<!--$("#2").css("background", "black");-->
+<!--arr[2] = 1;-->
+<!--} else {-->
+<!--$("#2").css("background", "yellow");-->
+<!--arr[2] = 0;-->
+<!--}-->
+<!--count2++;-->
+<!--});-->
+
+<!--$("#save").click(function () {-->
+<!--console.log(arr);-->
+<!--//-->
+<!--$.post("save.php", {-->
+<!--map: JSON.stringify(arr)-->
+<!--}, function (data) {-->
+<!--console.log(data);-->
+<!--});-->
+<!--});-->
+<!--</script>-->
 
 
 <script>
     $(function () {
         $("#parameter").click(function () {
-            // $("#map").remove();
-            $("#map").css("width", $("#horizontal").val() * 100);
-            $("#map").css("height", $("#vertical").val() * 100);
+            var count = 0;
+            $("#map").empty();
+            $("#map").css("width", $("#horizontal").val() * 100 + $("#horizontal").val() * 2);
+            $("#map").css("height", $("#vertical").val() * 100+ $("#vertical").val() * 2);
 
-            for (var i = 0; i < $("#horizontal").val() * $("#vertical").val(); i++) {
-                $("#block").append("<div id=" + i + " class='block'>" +(i+1)  + "</div>");
+            var arr = new Array($("#horizontal").val());
+            //
+            for (var i = 0; i < $("#vertical").val(); i++) { // 列
+                arr[i] = new Array($("#vertical").val());
+                for (var j = 0; j < $("#horizontal").val(); j++) { // 欄
+                    $("#map").append("<div id='" + i + "_" + j + "' class='block'></div>");
+                    // $("#" + i + "_" + j).click(function () {
+                    //     // if (count % 2 == 0) {
+                    //     $("#" + 0 + "_" + 0).css("background", "black");
+                    //
+                    //     // } else {
+                    //     //     $("#" + i + j).css("background", "red");
+                    //     // }
+                    //     // count++;
+                    // });
+                    // error
+                }
             }
 
-
-            // var map = new array($("#horizontal").val());
-            // console.log(map.length);
-            // alert();
-            // alert();
+            // 更改區塊顏色
+            $("#" + 1 + "_" + 1).click(function () {
+                if (count % 2 == 0) {
+                    $("#" + 1 + "_" + 1).css("background", "black");
+                } else {
+                    $("#" + 1 + "_" + 1).css("background", "red");
+                }
+                count++;
+            });
+            // // 如果有n個區塊，不知這邊怎麼寫活的
         });
     });
 
