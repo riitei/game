@@ -22,8 +22,7 @@
             padding-top: 100px;
             padding-left: 100px;
             overflow: hidden;
-            /*width: 100px;*/
-            /*height: 100px;*/
+
         }
 
         /*通行*/
@@ -95,14 +94,8 @@
                     //
                     if (horizontal > 0) { // 防止超過界線
                         horizontal -= 1; // 陣列向左移動
-                        // var obstacle = move(map[vertical][horizontal], "left", horizontal, vertical);
-                        // if (obstacle == true) {
-                        //     horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
-                        // }
-
-                        if (map[vertical][horizontal] == 0) { // 可以通行
-                            $("#top").css("left", horizontal * 100 + "px");
-                        } else {
+                        var obstacle = move(map[vertical][horizontal], "left", horizontal, vertical);
+                        if (obstacle == true) {
                             horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
 
@@ -118,18 +111,11 @@
                         //
                         vertical -= 1;// 陣列向上移動
 
-                        // var obstacle = move(map[vertical][horizontal], "top", horizontal, vertical);
-                        // if (obstacle == true) {
-                        //     vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
-                        // }
-
-                        if (map[vertical][horizontal] == 0) {// 可以通行
-                            //
-                            $("#top").css("top", vertical * 100 + "px");
-
-                        } else {
+                        var obstacle = move(map[vertical][horizontal], "top", horizontal, vertical);
+                        if (obstacle == true) {
                             vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
                         }
+
                         console.log(vertical + "," + horizontal);
                     }
 
@@ -142,17 +128,8 @@
                         //
                         horizontal += 1;// 陣列向右移動
 
-                        // var obstacle = move(map[vertical][horizontal], "left", horizontal, vertical);
-                        // if (obstacle == true) {
-                        //     horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
-                        // }
-
-
-
-                        if (map[vertical][horizontal] == 0) {// 可以通行
-                            //
-                            $("#top").css("left", horizontal * 100 + "px");
-                        } else {
+                        var obstacle = move(map[vertical][horizontal], "left", horizontal, vertical);
+                        if (obstacle == true) {
                             horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
 
@@ -169,18 +146,9 @@
                         vertical += 1;// 陣列向下移動
 
 
-                        //
-                        // var obstacle = move(map[vertical][horizontal], "top", horizontal, vertical);
-                        // if (obstacle == true) {
-                        //     vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
-                        // }
 
-
-                        if (map[vertical][horizontal] == 0) {// 可以通行
-                            //
-                            $("#top").css("top", vertical * 100 + "px");
-
-                        } else {
+                        var obstacle = move(map[vertical][horizontal], "top", horizontal, vertical);
+                        if (obstacle == true) {
                             vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
                         }
 
