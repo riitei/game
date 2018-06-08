@@ -29,16 +29,20 @@
         .pass {
             height: 100px;
             width: 100px;
-            background: yellow;
             float: left;
+            background-image: url("/photo/pass.jpg"); /*抓取圖片url*/
+            background-size: 100px 100px; /*定義圖片長寬*/
         }
 
         /*障礙*/
         .obstacle {
             height: 100px;
             width: 100px;
-            /*background: blueviolet;*/
             float: left;
+
+            background-image: url("/photo/obstacle.jpg"); /*抓取圖片url*/
+            background-size: 100px 100px; /*定義圖片長寬*/
+
         }
 
     </style>
@@ -54,6 +58,7 @@
             [0, 0, 0, 0, 0]];
         // map陣列值為 0 可以圖片通行
         // map陣列值為 1 可以圖片通行
+
         var verticalLength = map.length;// 欄
         var horizontalLength = map[map.length - 1].length;// 列
 
@@ -71,10 +76,12 @@
             for (var i = 0; i < verticalLength; i++) {
                 for (var j = 0; j < horizontalLength; j++) {
                     if (map[i][j] == 1) {
-                        $("#map").append("<img src='photo/obstacle.jpg' class='obstacle'> </img>");
+                        // $("#map").append("<img src='photo/obstacle.jpg' class='obstacle'> </img>");
+                        $("#map").append("<div class='obstacle'></div>");
+
                         // 障礙物
                     } else {
-                        $("#map").append("<img src='photo/pass.jpg' class='pass'></img>");
+                        $("#map").append("<div class='pass'></div>");
                         // 可通行
                     }
                 }
@@ -90,65 +97,19 @@
             switch (event.which) {
                 case 37:// 鍵盤 左按鍵
                     move("左", horizontal, vertical);
-                    // //
-                    // if (horizontal > 0) { // 防止超過界線
-                    //     horizontal -= 1; // 陣列向左移動
-                    //     var obstacle = move(map[vertical][horizontal], "left", horizontal, vertical);
-                    //     if (obstacle == true) {
-                    //         horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
-                    //     }
-                    //
-                    //     console.log(vertical + "," + horizontal);
-                    // }
-
 
                     break;
                 case 38:// 鍵盤 上按鍵
                     move("上", horizontal, vertical);
-                    // if (vertical > 0) { // 防止超過界線
-                    //     //
-                    //     vertical -= 1;// 陣列向上移動
-                    //
-                    //     var obstacle = move(map[vertical][horizontal], "top", horizontal, vertical);
-                    //     if (obstacle == true) {
-                    //         vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
-                    //     }
-                    //
-                    //     console.log(vertical + "," + horizontal);
-                    // }
 
                     break;
                 case 39:// 鍵盤 右按鍵
                     move("右", horizontal, vertical);
-                    //
-                    // if (horizontal < horizontalLength - 1) { // 防止超過界線
-                    //     //
-                    //     horizontal += 1;// 陣列向右移動
-                    //
-                    //     var obstacle = move(map[vertical][horizontal], "left", horizontal, vertical);
-                    //     if (obstacle == true) {
-                    //         horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
-                    //     }
-                    //
-                    //     console.log(vertical + "," + horizontal);
-                    //
-                    // }
+
                     break;
                 case 40:// 鍵盤 下按鍵
                     move("下", horizontal, vertical);
-                    // if (vertical < verticalLength - 1) { // 防止超過界線
-                    //     //
-                    //     vertical += 1;// 陣列向下移動
-                    //
-                    //
-                    //
-                    //     var obstacle = move(map[vertical][horizontal], "top", horizontal, vertical);
-                    //     if (obstacle == true) {
-                    //         vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
-                    //     }
-                    //
-                    //     console.log(vertical + "," + horizontal);
-                    // }
+
                     break;
                 default:
                     break;
@@ -279,5 +240,6 @@
     <!--&lt;!&ndash;區塊 不可通行&ndash;&gt;-->
     <!--<img src="photo/obstacle.jpg" class="obstacle" style="display: none">-->
 </div>
+
 </body>
 </html>
