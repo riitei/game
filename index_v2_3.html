@@ -122,21 +122,25 @@
     });
 
     // 選轉圖片
-    function rotate(rotate) {
-        $("#top").css("transform", "rotate(" + rotate + "deg)");
-        $("#top").css("-ms-transform", "rotate(" + rotate + "deg)");
-        $("#top").css("-moz-transform", "rotate(" + rotate + "deg)");
-        $("#top").css("-webkit-transform", "rotate(" + rotate + "deg)");
-        $("#top").css("-o-transform", "rotate(" + rotate + "deg)");
+    function rotate(rotate, stop) {
+        if (stop == false) { //遇到牆壁可以顯示正確方向位置
+            $("#top").css("transform", "rotate(" + rotate + "deg)");
+            $("#top").css("-ms-transform", "rotate(" + rotate + "deg)");
+            $("#top").css("-moz-transform", "rotate(" + rotate + "deg)");
+            $("#top").css("-webkit-transform", "rotate(" + rotate + "deg)");
+            $("#top").css("-o-transform", "rotate(" + rotate + "deg)");
+        }
+
     }
 
     // 圖片移動
     function move(direction, horizontal, vertical) {
         switch (direction) {
             case "左":
-                // 圖片選轉 270 度
-                if (horizontal > 0 && stop == false) {
-                    rotate(270);
+                // 圖片選轉 270 度，遇到牆壁可以顯示正確方向位置
+                rotate(270, stop);
+                if (horizontal > 0) {
+
                     this.horizontal = horizontal - 1; // 陣列向左移動
                     obstacle = pass(map[this.vertical][this.horizontal], "left", this.horizontal, this.vertical);
                     if (obstacle) {
@@ -145,10 +149,11 @@
                 }
                 break;
             case "上":
-                //  圖片選轉 0 度
+                //  圖片選轉 0 度 ，遇到牆壁可以顯示正確方向位置
+                rotate(0, stop);
 
-                if (vertical > 0 && stop == false) {
-                    rotate(0);
+                if (vertical > 0) {
+
                     this.vertical = vertical - 1;// 陣列向上移動
                     obstacle = pass(map[this.vertical][this.horizontal], "top", this.horizontal, this.vertical);
                     if (obstacle) {
@@ -158,9 +163,11 @@
                 }
                 break;
             case "右":
-                // 圖片選轉 90 度
-                if (horizontal < horizontalLength - 1 && stop==false) {
-                    rotate(90);
+                // 圖片選轉 90 度，遇到牆壁可以顯示正確方向位置
+                rotate(90, stop);
+
+                if (horizontal < horizontalLength - 1) {
+
                     this.horizontal = horizontal + 1;// 陣列向右移動
                     obstacle = pass(map[this.vertical][this.horizontal], "left", this.horizontal, this.vertical);
                     if (obstacle) {
@@ -170,9 +177,12 @@
                 }
                 break;
             case "下":
-                // 圖片選轉 180 度
-                if (vertical < verticalLength - 1 && stop == false) {
-                    rotate(180);
+                // 圖片選轉 180 度，遇到牆壁可以顯示正確方向位置
+                rotate(180, stop);
+
+
+                if (vertical < verticalLength - 1) {
+
                     this.vertical = vertical + 1;// 陣列向下移動
                     obstacle = pass(map[this.vertical][this.horizontal], "top", this.horizontal, this.vertical);
                     if (obstacle) {
