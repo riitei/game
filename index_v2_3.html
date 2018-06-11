@@ -197,9 +197,6 @@
     // 通行
     function pass(map, direction, horizontal, vertical) {
 
-        //
-
-
         if (map == 0 && stop == false) { // 可以通行
             switch (direction) {
                 case "left":// 左
@@ -209,15 +206,10 @@
                     $("#top").css("top", vertical * 100 + "px");
                     break;
             }
-            console.log("行走 map " + map + " -> " + vertical + "," + horizontal);
-
         } else if (map == 2) {
-            console.log("不能行走 map " + map + " -> " + vertical + "," + horizontal);
-
-
-            stop = true;
+            stop = true;// 進入對話框座標，停止圖片移動
             $("#dialog").empty();// 清除對話框
-            dialog(vertical, horizontal);
+            dialog(vertical, horizontal);// 顯示對話框座標
             $("#dialog").css("display", "inline");//顯示對話框
             return true;// 回到上一步 座標位置
         } else {
@@ -225,16 +217,18 @@
         }
 
     }//pass
-
+    // 對話框
     function dialog(vertical, horizontal) {
-        if (vertical == 5 && horizontal == 1) {
+        if (vertical == 5 && horizontal == 1) {// 對話框座標
+            // 添加對話框內容
             $("#dialog").append(
                 "<div style='width: 1000px;height: 200px;background-color: #7b76a8'>" +
                 "yan" +
                 "    <img src='photo/obstacle.jpg' width='100px' height='100px'>\n" +
                 "    <button id='t_close_01' type='button'>關閉</button></div>");
         }
-        if (vertical == 1 && horizontal == 3) {
+        if (vertical == 1 && horizontal == 3) {// 對話框座標
+            // 添加對話框內容
             $("#dialog").append(
                 "<div style='width: 1000px;height: 200px;background-color: #7b76a8'>" +
                 "ting" +
