@@ -21,13 +21,13 @@
             padding-top: 100px;
             padding-left: 100px;
             overflow: hidden;
+            z-index: 0;
         }
 
         /*通行*/
         .pass {
             height: 100px;
             width: 100px;
-            /*background: yellow;*/
             float: left;
             background-image: url("photo/pass.jpg"); /*抓取圖片url*/
             background-size: 100px 100px; /*定義圖片長寬*/
@@ -37,7 +37,6 @@
         .obstacle {
             height: 100px;
             width: 100px;
-            /*background: blueviolet;*/
             float: left;
             background-image: url("photo/obstacle.jpg"); /*抓取圖片url*/
             background-size: 100px 100px; /*定義圖片長寬*/
@@ -101,12 +100,6 @@
             }
         });
         $(document).keydown(function (event) {
-            // $("#start").css("display", "none");
-            // $("#top").css("display", "none");
-            // $("#down").css("display", "none");
-            // $("#left").css("display", "none");
-            // $("#right").css("display", "none");
-            // if (horizontal > 0 || vertical > 0 || horizontal < horizontalLength - 1 || vertical < verticalLength - 1) {
             switch (event.which) {
                 case 37:// 鍵盤 左按鍵
                     move("左", horizontal, vertical);
@@ -141,9 +134,7 @@
                     // 顯上左邊圖片
                     // if (stop == false) {
                     $("#left").css("display", "inline");
-                    $("#top").css("display", "none");
-                    $("#down").css("display", "none");
-                    $("#right").css("display", "none");
+                    $("#top,#down,#right").css("display", "none");
                     // }
 
                     break;
@@ -159,9 +150,7 @@
                     // if (stop == false) {
                     // 顯上上面圖片
                     $("#top").css("display", "inline");
-                    $("#down").css("display", "none");
-                    $("#left").css("display", "none");
-                    $("#right").css("display", "none");
+                    $("#down,#left,#right").css("display", "none");
                     // }
 
                     break;
@@ -177,9 +166,7 @@
                     // if (stop == false) {
                     // 顯上右邊圖片
                     $("#right").css("display", "inline");
-                    $("#top").css("display", "none");
-                    $("#down").css("display", "none");
-                    $("#left").css("display", "none");
+                    $("#top,#down,#left").css("display", "none");
                     // }
 
                     break;
@@ -194,41 +181,19 @@
                     // if (stop == false) {
                     // 顯上下面圖片
                     $("#down").css("display", "inline");
-                    $("#top").css("display", "none");
-                    $("#left").css("display", "none");
-                    $("#right").css("display", "none");
+                    $("#top,#left,#right").css("display", "none");
                     // }
 
                     break;
             }
 
-            // 判斷是否通行
-            function pass(map, direction, horizontal, vertical) {
-                if (map == 0) {// 可以通行
-                    switch (direction) {
-                        case "top":
-                            // 四個圖片同時移動
-                            $("#top").css("top", vertical * 100 + "px");
-                            $("#down").css("top", vertical * 100 + "px");
-                            $("#left").css("top", vertical * 100 + "px");
-                            $("#right").css("top", vertical * 100 + "px");
-                            break;
-                        case "left":
-                            $("#top").css("left", horizontal * 100 + "px");
-                            $("#down").css("left", horizontal * 100 + "px");
-                            $("#left").css("left", horizontal * 100 + "px");
-                            $("#right").css("left", horizontal * 100 + "px");
-                            break;
-                    }
-                } else {// 不可通行
-                    return true;
-                }
-            }
+
         } // move
+
+
         // 判斷是否通行
         function pass(map, direction, horizontal, vertical) {
-            // if (map == 0 && stop == false) {// 可以通行
-            if (map == 0) {// 可以通行
+            if (map == 0 && stop == false) {// 可以通行
                 switch (direction) {
                     case "top":
                         // 四個圖片同時移動
@@ -246,35 +211,38 @@
                 }
                 console.log("可通行 " + vertical + "," + horizontal);
             } else if (map == 2) {
-                // stop = true;// 進入對話框座標，停止圖片移動
-                $("#dialog").empty();// 清除對話框
-                dialog(vertical, horizontal);// 顯示對話框座標
-                $("#dialog").css("display", "inline");//顯示對話框
+                stop = true;//鎖住鍵盤移動
+                $("#dialog").empty();
+                dialog(vertical, horizontal);
+                $("#dialog").css("display", "inline");
                 console.log("角色 " + vertical + "," + horizontal);
-
-                return true;// 回到上一步 座標位置
+                return true;// 不可通行
             } else {// 不可通行
                 console.log("不可通行 " + vertical + "," + horizontal);
-                return true;
+                return true;// 不可通行
             }
-        } // pass
-          // 對話框
+            // $("#dialog").css("display","none");
+
+        }
+
+
+        // 對話框
         function dialog(vertical, horizontal) {
             if (vertical == 5 && horizontal == 1) {// 對話框座標
                 // 添加對話框內容
                 $("#dialog").append(
-                    "<div style='width: 1000px;height: 200px;background-color: #7b76a8'>" +
                     "yan" +
-                    "    <img src='photo/obstacle.jpg' width='100px' height='100px'>\n" +
-                    "    <button id='t_close_01' type='button'>關閉</button></div>");
+                    "    <img src='photo/obstacle.jpg' class='dialog_photo'>" +
+                    "<br><br>" +
+                    "    <button id='t_close_01' type='button'>關閉</button>");
             }
             if (vertical == 1 && horizontal == 3) {// 對話框座標
                 // 添加對話框內容
                 $("#dialog").append(
-                    "<div style='width: 1000px;height: 200px;background-color: #7b76a8'>" +
                     "ting" +
-                    "    <img src='01.jpg' width='100px' height='100px'>\n" +
-                    "    <button id='t_close_01' type='button'>關閉</button></div>");
+                    "    <img src='photo/obstacle.jpg' class='dialog_photo'>" +
+                    "<br><br>" +
+                    "    <button id='t_close_01' type='button'>關閉</button>");
             }
         }
 
@@ -297,8 +265,38 @@
     <div id="block"></div>
 </div>
 
-<div id="dialog" style="display: none">
+<style type="text/css">
+    /*提示框*/
+    .dialog {
+        margin-left: 100px;
+        margin-top: 720px;
+        position: absolute;
+        width: 250px;
+        height: 100px;
+        background-color: #7b76a8;
+        display: none;
+        z-index: 1;
+    }
 
-</div>
+    .dialog_photo {
+        position: absolute;
+        float: left;
+        width: 50px;
+        height: 50px;
+    }
+
+</style>
+
+<script>
+    $(function () {
+        $(document).on('click', '#t_close_01', function () {
+            stop = false;
+            $("#dialog").css("display", "none");
+            console.log("close");
+        });
+    });
+</script>
+
+<div id="dialog" class="dialog"></div>
 </body>
 </html>
