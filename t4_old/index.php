@@ -124,72 +124,96 @@
             $("#start").css("display", "none");
             switch (direction) {
                 case "左":
+                    // 顯上左邊圖片
+
+                    photo_show("左", stop);
                     if (horizontal > 0) {
                         this.horizontal = horizontal - 1; // 陣列向左移動
                         var obstacle = pass(map[this.vertical][this.horizontal], "left", this.horizontal, this.vertical);
+
+                        // 無法通行
                         if (obstacle) {
                             this.horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
+
                     }
-                    // 顯上左邊圖片
-                    // if (stop == false) {
-                    $("#left").css("display", "inline");
-                    $("#top,#down,#right").css("display", "none");
-                    // }
+
 
                     break;
                 case "上":
+                    // 顯上上面圖片
+                    photo_show("上", stop);
+
                     if (vertical > 0) {
                         this.vertical = vertical - 1;// 陣列向上移動
                         var obstacle = pass(map[this.vertical][this.horizontal], "top", this.horizontal, this.vertical);
+
+                        // 無法通行
                         if (obstacle) {
+
                             this.vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
                         }
-                        //
+
                     }
-                    // if (stop == false) {
-                    // 顯上上面圖片
-                    $("#top").css("display", "inline");
-                    $("#down,#left,#right").css("display", "none");
-                    // }
+                    //
 
                     break;
-                case "右":
+                case"右":
+                    // 顯上右邊圖片
+                    photo_show("右", stop);
                     if (horizontal < horizontalLength - 1) {
                         this.horizontal = horizontal + 1;// 陣列向右移動
                         var obstacle = pass(map[this.vertical][this.horizontal], "left", this.horizontal, this.vertical);
+                        // 無法通行
                         if (obstacle) {
                             this.horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
                         //
                     }
-                    // if (stop == false) {
-                    // 顯上右邊圖片
-                    $("#right").css("display", "inline");
-                    $("#top,#down,#left").css("display", "none");
-                    // }
+
 
                     break;
-                case "下":
+                case"下":
+                    // 顯上下面圖片
+                    photo_show("下", stop);
                     if (vertical < verticalLength - 1) {
                         this.vertical = vertical + 1;// 陣列向下移動
                         var obstacle = pass(map[this.vertical][this.horizontal], "top", this.horizontal, this.vertical);
+
+                        // 無法通行
                         if (obstacle) {
                             this.vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
                         }
+
                     }
-                    // if (stop == false) {
-                    // 顯上下面圖片
-                    $("#down").css("display", "inline");
-                    $("#top,#left,#right").css("display", "none");
-                    // }
 
                     break;
-            }
-
+            }//switch
 
         } // move
+        function photo_show(direction, stop) {
+            if (stop == false) {
+                switch (direction) {
+                    case"左":
+                        $("#left").css("display", "inline");
+                        $("#top,#down,#right").css("display", "none");
+                        break;
+                    case "上":
+                        $("#top").css("display", "inline");
+                        $("#down,#left,#right").css("display", "none");
+                        break;
+                    case "右":
+                        $("#right").css("display", "inline");
+                        $("#top,#down,#left").css("display", "none");
+                        break;
+                    case "下":
+                        $("#down").css("display", "inline");
+                        $("#top,#left,#right").css("display", "none");
+                        break;
+                }
+            }
 
+        }
 
         // 判斷是否通行
         function pass(map, direction, horizontal, vertical) {
@@ -211,7 +235,8 @@
                 }
                 console.log("可通行 " + vertical + "," + horizontal);
             } else if (map == 2) {
-                stop = true;//鎖住鍵盤移動
+                stop = true;// 鎖住鍵盤移動
+                photo_show("", stop);// 鎖定圖片顯示
                 $("#dialog").empty();
                 dialog(vertical, horizontal);
                 $("#dialog").css("display", "inline");
@@ -221,8 +246,6 @@
                 console.log("不可通行 " + vertical + "," + horizontal);
                 return true;// 不可通行
             }
-            // $("#dialog").css("display","none");
-
         }
 
 
