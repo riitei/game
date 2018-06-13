@@ -68,8 +68,7 @@
         //     [0, 1, 0, 1, 0],
         //     [0, 0, 0, 1, 0],
         //     [0, 2, 0, 0, 0]];
-        var map = <?=$my_map_array_value?>
-        //var map = JSON.parse(<?//=$my_mapy_json?>//);
+        var map = <?=$my_map_array_value?>;
         // map陣列值為 0 圖片通行
         // map陣列值為 1 障礙物
         // map陣列值為 2 角色
@@ -79,6 +78,7 @@
         var horizontal = 0;// 圖片初始位置 陣列 列
         var stop = false;// 控制是否能行走，預設可以行走
         $(function () {
+            // 四張圖片重疊，初始座標位置
             $("#start").css("top", vertical * 100);// 圖片初始位置 陣列 欄
             $("#start").css("left", horizontal * 100);// 圖片初始位置 陣列 列
             $("#top").css("top", vertical * 100);// 圖片初始位置 陣列 欄
@@ -139,16 +139,8 @@
                     break;
                 default:
                     break;
-            }
-            // if(move_place){
-            //     console.log(move_place);
-            //     console.log("v " + move_place["new_vertical"]);
-            //     console.log("h " + move_place["new_horizontal"]);
-            //     console.log("map "+map[move_place["new_vertical"]][move_place["new_horizontal"]]);
-            // }else{
-            //     console.log("null");
-            // }
-            console.log(move_place);
+            }// switch
+
             if (move_place) {
                 var direction = pass(
                     map[move_place["new_vertical"]][move_place["new_horizontal"]],
@@ -157,96 +149,55 @@
                     move_place["place_direction"],
                     move_place["old_vertical"],
                     move_place["old_horizontal"]);
-                //
                 vertical = direction.now_vertical;
                 horizontal = direction.now_horizonta;
-                console.log(vertical + "," + horizontal);
             }
-            console.log("_");
 
-        });
+        });// keydown
 
         // 圖片移動是否超出界線
         function move(direction, vertical, horizontal) {
             var coordinate = new Array();
+            // 紀錄原座標
+            coordinate["old_vertical"] = vertical;
+            coordinate["old_horizontal"] = horizontal;
+            // 初始新座標
+            coordinate["new_vertical"] = vertical;
+            coordinate["new_horizontal"] = horizontal;
 
             switch (direction) {
                 case "左":
-
                     if (horizontal > 0) { // 防止超過界線
-                        coordinate["old_vertical"] = vertical;
-                        coordinate["old_horizontal"] = horizontal;
-                        coordinate["new_vertical"] = vertical;
                         coordinate["new_horizontal"] = horizontal - 1; // 陣列向左移動
-
                         coordinate["place_direction"] = "left"
-
-                        // var obstacle = pass(map[this.vertical][this.horizontal], "left", this.horizontal, this.vertical);
-                        //
-                        // // 無法通行
-                        // if (obstacle) {
-                        //     this.horizontal = temp_horizontal;// 不能通行，設為原來位置
-                        // }
+                    } else {
+                        coordinate = null;
                     }
-
-
                     break;
                 case "上":
                     if (vertical > 0) { // 防止超過界線
-                        coordinate["old_vertical"] = vertical;
-                        coordinate["old_horizontal"] = horizontal;
                         coordinate["new_vertical"] = vertical - 1;// 陣列向上移動
-                        coordinate["new_horizontal"] = horizontal;
                         coordinate["place_direction"] = "top";
-                        // var obstacle = pass(map[this.vertical][this.horizontal], "top", this.horizontal, this.vertical);
-                        //
-                        // // 無法通行
-                        // if (obstacle) {
-                        //     this.vertical = temp_vertical;// 不能通行，設為原來位置
-                        // }
-
+                    } else {
+                        coordinate = null;
                     }
-                    //
-
                     break;
                 case"右":
 
                     if (horizontal < horizontalLength - 1) { // 防止超過界線
-
-                        coordinate["old_vertical"] = vertical;
-                        coordinate["old_horizontal"] = horizontal;
-                        coordinate["new_vertical"] = vertical;
                         coordinate["new_horizontal"] = horizontal + 1;// 陣列向右移動
                         coordinate["place_direction"] = "left";
-
-                        // var obstacle = pass(map[this.vertical][this.horizontal], "left", this.horizontal, this.vertical);
-                        // // 無法通行
-                        // if (obstacle) {
-                        //     this.horizontal = temp_horizontal;// 不能通行，設為原來位置
-                        // }
-                        //
+                    } else {
+                        coordinate = null;
                     }
-
-
                     break;
                 case"下":
-
                     if (vertical < verticalLength - 1) { // 防止超過界線
-                        coordinate["old_vertical"] = vertical;
-                        coordinate["old_horizontal"] = horizontal;
                         coordinate ["new_vertical"] = vertical + 1;// 陣列向下移動
-                        coordinate["new_horizontal"] = horizontal;
                         coordinate ["place_direction"] = "top";
-
-                        // var obstacle = pass(map[this.vertical][this.horizontal], "top", this.horizontal, this.vertical);
-                        //
-                        // // 無法通行
-                        // if (obstacle) {
-                        //     this.vertical = temp_vertical;// 不能通行，設為原來位置
-                        // }
-
+                    } else {
+                        coordinate = null;
                     }
-
                     break;
             }//switch
             return coordinate;
@@ -280,13 +231,6 @@
 
         // 判斷是否通行
         function pass(map, new_vertical, new_horizontal, place_direction, old_vertical, old_horizontal) {
-            console.log("map " + map);
-            console.log("n_v " + new_vertical);
-            console.log("n_h " + new_horizontal);
-            console.log("p_d " + place_direction);
-            console.log("o_v " + old_vertical);
-            console.log("o_h " + old_horizontal);
-
             var now_vertical;
             var now_horizonta;
             if (map == 0 && stop == false) {// 可以通行
@@ -309,18 +253,18 @@
                 now_vertical = new_vertical;
                 now_horizonta = new_horizontal;
 
-            }
-            else if (map == 2) { // 角色
+            } else if (map == 2) { // 角色
                 stop = true;// 鎖住鍵盤移動
                 photo_show("", stop);// 鎖定圖片顯示
                 $("#dialog").empty();
                 dialog(new_vertical, new_horizontal);
                 $("#dialog").css("display", "inline");
-                // return true;// 不可通行
+                // 存放未移動座標位置
                 now_vertical = old_vertical;
                 now_horizonta = old_horizontal;
             }
             else { // 不可通行
+                // 存放未移動座標位置
                 now_vertical = old_vertical;
                 now_horizonta = old_horizontal;
             }
@@ -328,8 +272,6 @@
             return {"now_vertical": now_vertical, "now_horizonta": now_horizonta};
 
         }
-
-
         // 對話框
         function dialog(vertical, horizontal) {
             if (vertical == 5 && horizontal == 1) {// 對話框座標
@@ -354,7 +296,6 @@
 
 </head>
 <body>
-yan
 <!--地圖-->
 <div id="map" class="map">
     <!--圖片-->
