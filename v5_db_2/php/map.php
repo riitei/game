@@ -13,7 +13,7 @@ include "DBConnection.php";
 class map
 {
 
-    public function mapJSON()
+    public function mapInfo()
     {
         // 從DB的 vertical 資料欄位取得最大值
         $vertical_sql = 'SELECT max(map_vertical) as vertical FROM game.map_coordinate;';
@@ -36,16 +36,34 @@ class map
                 // 從 sql 語句得到 ﻿map_value 值
                 // $map[vertical][horizontal] = $map_value['map_value'];
                 $map_value[$i][$j] = $map['map_value'];
-                $photo_path[$i][$j][$map['map_value']]=$map['map_photo_path'];
+                $photo_path[$i][$j] = $map['map_photo_path'];
             }
         }
-        return ['map'=>json_encode($map_value,true),'photo'=>json_encode($photo_path,true)];
-           // json_encode($map, true);
+        return ['map' => json_encode($map_value,true), 'photo' => $photo_path];
 
     }
 }
 
-
-
-
+//
+//$map = new map();
+//$map = $map->mapInfo();
+//
+//echo "yan<br>";
+//
+//for ($i = 0; $i < count($map['photo']); $i++) {
+//    for ($j = 0; $j < count($map['photo'][$i]); $j++) {
+//        echo "<img src='".$map['photo'][$i][$j]."' width='100px' height='100px'>";
+//    }
+//    echo '<br>';
+//}
+//
+//echo '<br><br>';
+//
+//$ii = count($map['map']) . '<br>';
+//echo $ii . '<br>';
+//(int)$ii = (int)$ii -1;
+//echo count($map['map'][$ii]);
+//
+//
+//
 

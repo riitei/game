@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>demo</title>
+    <title>讀取DB座標資訊</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
     <style type="text/css">
         /*圖片*/
         .photo {
@@ -23,43 +25,18 @@
             overflow: hidden;
             z-index: 0;
         }
-
-        /*通行*/
-        .pass {
-            height: 100px;
-            width: 100px;
-            float: left;
-            background-image: url("photo/pass.jpg"); /*抓取圖片url*/
-            background-size: 100px 100px; /*定義圖片長寬*/
-        }
-
-        /*障礙*/
-        .obstacle {
-            height: 100px;
-            width: 100px;
-            float: left;
-            background-image: url("photo/obstacle.jpg"); /*抓取圖片url*/
-            background-size: 100px 100px; /*定義圖片長寬*/
-        }
-
-        /*角色*/
-        .character {
-            height: 100px;
-            width: 100px;
-            float: left;
-
-            background-image: url("photo/character.jpg"); /*抓取圖片url*/
-            background-size: 100px 100px; /*定義圖片長寬*/
-        }
     </style>
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <?php
-    include "php/DBConnection.php";
-    $my_map_sql = "SELECT map_array FROM game.map where checkpoint ='test';";
-    $my_map_search = DBConnection::PDO()->query($my_map_sql)->fetch();
-    $my_map_array_value = $my_map_search['map_array'];// 抓 DB 地圖資料
-    $my_mapy_json = json_encode($my_map_array_value);
+    include "php/map.php";
+    $map = new map();
+    $my_map = $map->mapInfo();
+    $my_map_array_value = $my_map['map'];// 讀取 map array 值
+    $my_map_photo_path = array();
+    $my_map_photo_path = $my_map['photo'];// 讀取 map array 地圖路徑
+    $my_map_vertical_Length = count($my_map_photo_path);// 欄
+    $my_map_horizontal_Length = count($my_map_photo_path[count($my_map_photo_path) - 1]);// 列
     ?>
+
     <script type="text/javascript">
         // var map = [
         //     [0, 0, 0, 0, 0],
@@ -69,14 +46,12 @@
         //     [0, 0, 0, 1, 0],
         //     [0, 2, 0, 0, 0]];
         var map = <?=$my_map_array_value?>;
-        // map陣列值為 0 圖片通行
-        // map陣列值為 1 障礙物
-        // map陣列值為 2 角色
-        var verticalLength = map.length;// 欄
-        var horizontalLength = map[map.length - 1].length;// 列
+        var verticalLength = <?=$my_map_vertical_Length?>;// 欄
+        var horizontalLength = <?=$my_map_horizontal_Length?>;// 列
         var vertical = 5;// 圖片初始位置 陣列 欄
         var horizontal = 0;// 圖片初始位置 陣列 列
         var stop = false;// 控制是否能行走，預設可以行走
+        //
         $(function () {
             // 四張圖片重疊，初始座標位置
             $("#start").css("top", vertical * 100);// 圖片初始位置 陣列 欄
@@ -91,21 +66,6 @@
             $("#right").css("left", horizontal * 100);// 圖片初始位置 陣列 列
             $("#map").css("height", verticalLength * 100);// 透過陣列 橫 得知地圖最大高度範圍
             $("#map").css("width", horizontalLength * 100);//透過陣列 列 得知地圖最大長度範圍
-            //
-            for (var i = 0; i < verticalLength; i++) {
-                for (var j = 0; j < horizontalLength; j++) {
-                    if (map[i][j] == 1) {
-                        $("#map").append("<div class='obstacle'></div>");
-                        // 障礙物
-                    } else if (map[i][j] == 2) {
-                        $("#map").append("<div class='character'></div>");
-                        // 角色
-                    } else {
-                        $("#map").append("<div class='pass'></div>");
-                        // 可通行
-                    }
-                }
-            }
         });
         $(document).keydown(function (event) {
             $("#start").css("display", "none");
@@ -272,6 +232,7 @@
             return {"now_vertical": now_vertical, "now_horizonta": now_horizonta};
 
         }
+
         // 對話框
         function dialog(vertical, horizontal) {
             if (vertical == 5 && horizontal == 1) {// 對話框座標
@@ -298,8 +259,14 @@
 <body>
 <!--地圖-->
 <div id="map" class="map">
-    <!--圖片-->
-
+    <!--繪製地圖的圖片-->
+    <?php
+    for ($vertical = 0; $vertical < $my_map_vertical_Length; $vertical++) {
+        for ($horizontal = 0; $horizontal < $my_map_horizontal_Length; $horizontal++) {
+            echo "<img src='" . $my_map_photo_path[$vertical][$horizontal] . "'class = 'map_photo'>";
+        }
+    }
+    ?>
     <img id="start" class="photo" src="photo/start.jpg">
     <img id="top" class="photo" src="photo/top.png" style="display: none">
     <img id="down" class="photo" src="photo/down.png" style="display: none">

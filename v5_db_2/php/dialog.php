@@ -13,14 +13,14 @@ $dialog[5][1][1] = "chongqing";
 $dialog[1][3][0] = "ting";
 $dialog[1][3][1] = "taipei";
 
-$vertical = $_POST['vertical'];
-$horizontal = $_POST['horizontal'];
-//$vertical =5;
-//$horizontal=1;
+//$vertical = $_POST['vertical'];
+//$horizontal = $_POST['horizontal'];
+$vertical =5;
+$horizontal=1;
 
-//foreach($dialog[$vertical][$horizontal] as $key => $value){
-//    echo $key." ".$value."<br>";
-//}
+foreach($dialog[$vertical][$horizontal] as $key => $value){
+    echo $key." ".$value."<br>";
+}
 // array or db 轉成 json
 $json = json_encode($dialog[$vertical][$horizontal],true);
 
