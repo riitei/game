@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" charset="utf-8" http-equiv="Content-Type">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+
+<style>
+    .example{
+        margin-left: 100px;
+        margin-top: 100px;
+        width: 1000px;
+        overflow: hidden;
+    }
+
+    #drag1, #drag2, #drag3, #drag4, #drag5, #drag17, #drag18, #drag19, #drag20, #drag21, #drag22, #drag23, #drag24 {
+
+        height: 36px;
+        width: 400px;
+        margin: 10px;
+        padding: 2px;
+        border: 1px solid black;
+    }
+
+    #left {
+        float: left;
+    }
+    #right{
+        float: left;
+        margin-left: 100px;
+    }
+
+</style>
+
+
+<!--<Script Language="Javascript">-->
+    <!--&lt;!&ndash;-->
+    <!--//&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <!--//設定視窗尺寸,與不允許使用者變更大小-->
+    <!--//&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+    <!--//self.resizeTo(視窗的寬,視窗的高)-->
+    <!--// chick?-->
+    <!--self.resizeTo(800,400)-->
+
+    <!--//偵測使用者變更視窗大小的動作-->
+    <!--window.onresize=function()-->
+    <!--{-->
+<!--//當使用者變更視窗大小時,將本視窗再設定為..寬300px,高400px.-->
+        <!--self.resizeTo(800,400)-->
+    <!--}-->
+    <!--&ndash;&gt;-->
+<!--</Script>-->
+<!--<div id="dialog">-->
+<div class="example">
+    <div id="left">
+
+        <h4>public class Example {</h4>
+        <h4> &nbsp;&nbsp;&nbsp;&nbsp; public static void main(String[] argv) {</h4>
+        <h4></h4>
+        <h4>&nbsp;&nbsp;&nbsp;&nbsp; Student st1 = new Student();</h4>
+        <h4>
+            <div id="drag1" class="draggable-droppable">
+            <!--<input id="d1" type="hidden" value="ans1">-->
+            </div>
+        </h4>
+        <h4>//age</h4>
+        <h4>
+            <div id="drag2" class="draggable-droppable"></div>
+        </h4>
+        <h4>//id</h4>
+        <h4>
+            <div id="drag3" class="draggable-droppable"></div>
+        </h4>
+        <h4>//name</h4>
+        <h4>
+            <div id="drag4" class="draggable-droppable"></div>
+        </h4>
+        <h4>//gender</h4>
+        <h4>
+            <div id="drag5" class="draggable-droppable"></div>
+        </h4>
+        <h4>//grade</h4>
+        <h4>　}</h4>
+        <h4>}</h4>
+        <button id="submitcode1" onclick="code1submit()">submit</button>
+
+
+    </div>
+    <div id="right">
+        <h4>請完成右邊的Class Example。</h4>
+
+        <h4>
+            <div id="drag17" class="draggable-droppable">
+                <!--<div id="code1">st1.setName("John"); //code1:ans3</div>-->
+                <img src="img/code1.png" id="code1">code1_and3
+
+            </div>
+        </h4>
+        <h4>
+            <div id="drag18" class="draggable-droppable">
+                <!--<div id="code2">st1.setStudentId(87877); //code2:ans2</div>-->
+                <img src="img/code2.png" id="code2">code2_and02
+
+            </div>
+        </h4>
+        <h4>
+            <div id="drag19" class="draggable-droppable">
+                <!--<div id="code3">st1.setGrade("fourth"); //code3:ans5</div>-->
+                <img src="img/code3.png" id="code3">code3_and05
+
+            </div>
+        </h4>
+        <h4>
+            <div id="drag20" class="draggable-droppable">
+                <!--<div id="code4">People.setAge(10);//code4 </div>-->
+                <img src="img/code4.png" id="code4">code4
+
+            </div>
+        </h4>
+        <h4>
+            <div id="drag21" class="draggable-droppable">
+                <!--<div id="code5">st1.setGender("male"); //code5:ans4</div>-->
+                <img src="img/code5.png" id="code5">code5_ans04
+
+            </div>
+        </h4>
+        <h4>
+            <div id="drag22" class="draggable-droppable">
+                <!--<div id="code6">st1.setAge(10); //code6:ans1</div>-->
+                <img src="img/code6.png" id="code6">code6_ans01
+
+            </div>
+        </h4>
+        <h4>
+            <div id="drag23" class="draggable-droppable">
+                <!--<div id="code7">People.Name("John");code7</div>-->
+                <img src="img/code7.png" id="code7">code7
+
+            </div>
+        </h4>
+        <h4>
+            <div id="drag24" class="draggable-droppable">
+                <!--<div id="code8">People.setStudentId(87877);code8</div>-->
+                <img src="img/code8.png" id="code8">code8
+
+            </div>
+        </h4>
+    </div>
+
+
+</div>
+
+
+<script src="js/drag.js"></script>
+<script src="js/submit.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <style>
+    body {
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+    }
+    .object {
+      cursor: move;
+      width: 48px;
+      height: 48px;
+      border: 1px solid #333;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+    .object img {
+      width: 100%;
+      height: 100%;
+    }
+    .grid {
+      border-bottom: 1px solid #CCC;
+      border-right: 1px solid #CCC;
+      width: 50px;
+      height: 50px;
+      font-size: 0.8em;
+      color: #999;
+      position: absolute;
+    }
+    #background {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+  </style>
+  <script type="text/javascript">
+    function convertPosition(ui) {
+      return { x: parseInt( (ui.position.left + 20) / 50), y: parseInt( (ui.position.top + 20) / 50)};
+    }
+
+    function reposition(dom) {
+      dom.css('left', parseInt(dom.attr('x')) * 50);
+      dom.css('top', parseInt(dom.attr('y')) * 50);
+    }
+
+    $(document).ready( function() {
+      $('.object').each( function () {
+        reposition($(this));
+        $(this).draggable({
+          stop: function(event, ui) {
+            var position = convertPosition(ui);
+            $(this).attr('x', position.x);
+            $(this).attr('y', position.y)
+            reposition($(this));
+          }
+        });
+      });
+      insertBackground();
+    });
+
+    function insertBackground(){
+      var bg = $('#background');
+      for(var w=0;w < ($(window).width() / 50) + 1; w++) {
+        for(var h=0;h < ($(window).height() / 50) + 1; h++) {
+          var grid = $('<div />',
+            {
+              class: 'grid',
+              style: 'left: ' + w*50 + 'px; top: ' + h*50 + 'px;'
+            });
+          grid.text('(' + w + ',' + h + ')');
+          bg.append(grid);
+          }
+      }
+    }
+  </script>
+</head>
+<body>
+
+<div id="background" ></div>
+
+<div class="object" x="4", y="2" >
+  <img src="./images/icon1.png" />
+</div>
+<div class="object" x="5" y="3" >
+  <img src="./images/icon2.png" />
+</div>
+
+
+</body>
+</html>

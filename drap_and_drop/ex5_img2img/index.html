@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" charset="utf-8" http-equiv="Content-Type">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+
+<style>
+    .example {
+        margin-left: 100px;
+        margin-top: 100px;
+        width: 1100px;
+        overflow: hidden;
+    }
+
+    #drag1 {
+        position: absolute;
+        height: 36px;
+        width: 400px;
+        margin: 10px;
+        padding: 2px;
+        border: 1px solid black;
+        z-index: 1;
+        top: 200px;
+    }
+
+    #drag2 {
+        position: absolute;
+        z-index: 1;
+        height: 36px;
+        width: 400px;
+        margin: 10px;
+        padding: 2px;
+        border: 1px solid black;
+        top: 274px;
+
+    }
+
+    #drag3 {
+        position: absolute;
+        z-index: 1;
+        height: 36px;
+        width: 400px;
+        margin: 10px;
+        padding: 2px;
+        border: 1px solid black;
+        top: 350px;
+
+    }
+
+    #drag4 {
+        position: absolute;
+        z-index: 1;
+        height: 36px;
+        width: 400px;
+        margin: 10px;
+        padding: 2px;
+        border: 1px solid black;
+        top: 427px;
+    }
+
+    #drag5 {
+        position: absolute;
+        z-index: 1;
+        height: 36px;
+        width: 400px;
+        margin: 10px;
+        padding: 2px;
+        border: 1px solid black;
+        top: 500px;
+    }
+
+    #drag17, #drag18, #drag19, #drag20, #drag21, #drag22, #drag23, #drag24 {
+        height: 36px;
+        width: 400px;
+        margin: 10px;
+        padding: 2px;
+        border: 1px solid black;
+        top: 200px;
+
+    }
+
+    #left_topic {
+        position: absolute;
+        float: left;
+        z-index: 0;
+    }
+
+    #right {
+        float: left;
+        margin-left: 600px;
+    }
+
+
+</style>
+
+<div class="example">
+    <div id="left_topic">
+        <img src="img/topic.png">
+        <button id="submitcode1" onclick="code1submit()">submit</button>
+    </div>
+
+    <div id="drag1" class="draggable-droppable"></div>
+    <div id="drag2" class="draggable-droppable"></div>
+    <div id="drag3" class="draggable-droppable"></div>
+    <div id="drag4" class="draggable-droppable"></div>
+    <div id="drag5" class="draggable-droppable"></div>
+
+
+    <div id="right">
+        <h4>請完成右邊的Class Example。</h4>
+
+        <h4>
+            <div id="drag17" class="draggable-droppable">
+                <img src="img/code1.png" id="code1">code1_and03
+            </div>
+        </h4>
+        <h4>
+            <div id="drag18" class="draggable-droppable">
+                <img src="img/code2.png" id="code2">code2_and02
+            </div>
+        </h4>
+        <h4>
+            <div id="drag19" class="draggable-droppable">
+                <img src="img/code3.png" id="code3">code3_and05
+            </div>
+        </h4>
+        <h4>
+            <div id="drag20" class="draggable-droppable">
+                <img src="img/code4.png" id="code4">code4
+            </div>
+        </h4>
+        <h4>
+            <div id="drag21" class="draggable-droppable">
+                <img src="img/code5.png" id="code5">code5_ans04
+            </div>
+        </h4>
+        <h4>
+            <div id="drag22" class="draggable-droppable">
+                <img src="img/code6.png" id="code6">code6_ans01
+            </div>
+        </h4>
+        <h4>
+            <div id="drag23" class="draggable-droppable">
+                <img src="img/code7.png" id="code7">code7
+            </div>
+        </h4>
+        <h4>
+            <div id="drag24" class="draggable-droppable">
+                <img src="img/code8.png" id="code8">code8
+            </div>
+        </h4>
+    </div>
+
+
+</div>
+
+
+<script src="js/drag.js"></script>
+<script src="js/submit.js"></script>
+</body>
+</html>
