@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="UTF-8">
 
@@ -21,6 +20,8 @@
             padding-top: 100px;
             padding-left: 100px;
             overflow: hidden;
+            left: 0px;
+            top: 0px;
         }
 
         /*通行*/
@@ -103,7 +104,7 @@
                             //
                             map_horizontal += 1;
                             var map_h = map_horizontal * parseInt($("#map").css("padding-left"));
-                            $("#map").css("margin-left",map_h);
+                            $("#map").css("margin-left", map_h);
                             console.log("m_h-> " + map_h);
                         } else {
                             horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
@@ -128,7 +129,7 @@
                             //
                             map_vertical += 1;
                             var map_v = map_vertical * parseInt($("#map").css("padding-top"));
-                            $("#map").css("margin-top",map_v);
+                            $("#map").css("margin-top", map_v);
                             console.log("m_v-> " + map_v);
                             //
                         } else {
@@ -151,10 +152,11 @@
                             $("#down").css("left", horizontal * 100 + "px");
                             $("#left").css("left", horizontal * 100 + "px");
                             $("#right").css("left", horizontal * 100 + "px");
+                            // console.log("photo-> "+horizontal * 100 + "px");
                             //
                             map_horizontal -= 1;
                             var map_h = map_horizontal * parseInt($("#map").css("padding-left"));
-                            $("#map").css("margin-left",map_h);
+                            $("#map").css("margin-left", map_h);
                             console.log("m_h-> " + map_h);
                             //
 
@@ -183,7 +185,7 @@
                             //
                             map_vertical -= 1;
                             var map_v = map_vertical * parseInt($("#map").css("padding-top"));
-                            $("#map").css("margin-top",map_v);
+                            $("#map").css("margin-top", map_v);
                             console.log("m_v-> " + map_v);
 
                         } else {
@@ -203,9 +205,31 @@
     </script>
 
 </head>
-<body>
 
+<style>
+    .top {
+        position: absolute;
+        z-index: 10;
+        height: 100px;
+        width: 800px;
+        background-image: url("/photo/background.jpg");
+        top: 0px;
+        left: 0px;
+    }
 
+    .left {
+        position: absolute;
+        z-index: 10;
+        background-image: url("/photo/background.jpg"); /*抓取圖片url*/
+        height: 800px;
+        width: 100px;
+        left: 0px;
+
+    }
+</style>
+<!--<div class="background">-->
+<div class="top"></div>
+<div class="left"></div>
 <!--地圖-->
 <div id="map" class="map">
     <!--圖片-->
@@ -215,5 +239,6 @@
     <img id="left" class="photo" src="photo/left.png" style="display: none">
     <img id="right" class="photo" src="photo/right.png" style="display: none">
 </div>
+
 </body>
 </html>
