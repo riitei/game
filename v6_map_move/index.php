@@ -8,8 +8,8 @@
         /*圖片*/
         .photo {
             position: absolute;
-            margin-top: 100px;
-            margin-left: 100px;
+            padding-top: 100px;
+            padding-left: 100px;
             overflow: hidden;
             width: 100px;
             height: 100px;
@@ -21,8 +21,6 @@
             padding-top: 100px;
             padding-left: 100px;
             overflow: hidden;
-            /*width: 100px;*/
-            /*height: 100px;*/
         }
 
         /*通行*/
@@ -45,17 +43,19 @@
     <script type="text/javascript">
         var map = [
             [0, 0, 0, 0, 0],
-            [0, 1, 0, 1, 0],
-            [0, 1, 0, 1, 0],
-            [0, 1, 0, 1, 0],
-            [1, 1, 0, 1, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0]];
         // map陣列值為 0 可以圖片通行
         // map陣列值為 1 可以圖片通行
         var verticalLength = map.length;// 欄
         var horizontalLength = map[map.length - 1].length;// 列
-        var vertical = 5;// 圖片初始位置 陣列 欄
+        var vertical = 0;// 圖片初始位置 陣列 欄
         var horizontal = 0;// 圖片初始位置 陣列 列
+        var map_vertical = 0;
+        var map_horizontal = 0;
         $(function () {
             $("#start").css("top", vertical * 100 + "px");// 圖片初始位置 陣列 欄
             $("#start").css("left", horizontal * 100 + "px");// 圖片初始位置 陣列 列
@@ -73,10 +73,10 @@
             for (var i = 0; i < verticalLength; i++) {
                 for (var j = 0; j < horizontalLength; j++) {
                     if (map[i][j] == 1) {
-                        $("#block").append("<div class='obstacle'>" + i + "," + j + "</div>");
+                        $("#map").append("<div class='obstacle'>" + i + "," + j + "</div>");
                         // 障礙物
                     } else {
-                        $("#block").append("<div class='pass'>" + i + "," + j + "</div>");
+                        $("#map").append("<div class='pass'>" + i + "," + j + "</div>");
                         // 可通行
                     }
                 }
@@ -95,11 +95,16 @@
                         horizontal -= 1; // 陣列向左移動
                         if (map[vertical][horizontal] == 0) { // 可以通行
                             // 四個圖片同時移動
+                            $("#start").css("left", horizontal * 100 + "px");
                             $("#top").css("left", horizontal * 100 + "px");
                             $("#down").css("left", horizontal * 100 + "px");
                             $("#left").css("left", horizontal * 100 + "px");
                             $("#right").css("left", horizontal * 100 + "px");
                             //
+                            map_horizontal += 1;
+                            var map_h = map_horizontal * parseInt($("#map").css("padding-left"));
+                            $("#map").css("margin-left",map_h);
+                            console.log("m_h-> " + map_h);
                         } else {
                             horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
@@ -115,10 +120,16 @@
                         vertical -= 1;// 陣列向上移動
                         if (map[vertical][horizontal] == 0) {// 可以通行
                             // 四個圖片同時移動
+                            $("#start").css("top", vertical * 100 + "px");
                             $("#top").css("top", vertical * 100 + "px");
                             $("#down").css("top", vertical * 100 + "px");
                             $("#left").css("top", vertical * 100 + "px");
                             $("#right").css("top", vertical * 100 + "px");
+                            //
+                            map_vertical += 1;
+                            var map_v = map_vertical * parseInt($("#map").css("padding-top"));
+                            $("#map").css("margin-top",map_v);
+                            console.log("m_v-> " + map_v);
                             //
                         } else {
                             vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
@@ -135,11 +146,18 @@
                         horizontal += 1;// 陣列向右移動
                         if (map[vertical][horizontal] == 0) {// 可以通行
                             // 四個圖片同時移動
+                            $("#start").css("left", horizontal * 100 + "px");
                             $("#top").css("left", horizontal * 100 + "px");
                             $("#down").css("left", horizontal * 100 + "px");
                             $("#left").css("left", horizontal * 100 + "px");
                             $("#right").css("left", horizontal * 100 + "px");
                             //
+                            map_horizontal -= 1;
+                            var map_h = map_horizontal * parseInt($("#map").css("padding-left"));
+                            $("#map").css("margin-left",map_h);
+                            console.log("m_h-> " + map_h);
+                            //
+
                         } else {
                             horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
@@ -157,11 +175,17 @@
                         vertical += 1;// 陣列向下移動
                         if (map[vertical][horizontal] == 0) {// 可以通行
                             // 四個圖片同時移動
+                            $("#start").css("top", vertical * 100 + "px");
                             $("#top").css("top", vertical * 100 + "px");
                             $("#down").css("top", vertical * 100 + "px");
                             $("#left").css("top", vertical * 100 + "px");
                             $("#right").css("top", vertical * 100 + "px");
                             //
+                            map_vertical -= 1;
+                            var map_v = map_vertical * parseInt($("#map").css("padding-top"));
+                            $("#map").css("margin-top",map_v);
+                            console.log("m_v-> " + map_v);
+
                         } else {
                             vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
                         }
@@ -172,6 +196,7 @@
                     $("#down").css("display", "inline");
                     break;
                 default:
+                    $("#start").css("display", "inline");
                     break;
             }
         });
@@ -189,8 +214,6 @@
     <img id="down" class="photo" src="photo/down.png" style="display: none">
     <img id="left" class="photo" src="photo/left.png" style="display: none">
     <img id="right" class="photo" src="photo/right.png" style="display: none">
-    <!--區塊-->
-    <div id="block"></div>
 </div>
 </body>
 </html>
