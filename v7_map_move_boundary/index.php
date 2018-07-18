@@ -45,7 +45,7 @@
             position: absolute;
             z-index: 10;
             height: 100px;
-            width: 100%;
+            width: 1200px;
             background-image: url("/photo/background.jpg");
             top: 0px; /*去除邊框*/
             left: 0px; /*去除邊框*/
@@ -70,40 +70,63 @@
             height: 1200px;
             width: 1200px;
         }
+
+        /*.right{*/
+        /*position: absolute;*/
+        /*z-index: 10;*/
+        /*background-image: url("/photo/background.jpg"); !*抓取圖片url*!*/
+        /*border: green solid 5px;*/
+        /*height: 2000px;*/
+        /*width: 100px;*/
+        /*float: right;*/
+
+        /*}*/
     </style>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
         var map = [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]];
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0]];
+        // var map = [
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        //     [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        //     [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        //     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]];
         // map陣列值為 0 可以圖片通行
         // map陣列值為 1 可以圖片通行
         var verticalLength = map.length;// 欄
         var horizontalLength = map[map.length - 1].length;// 列
-        var vertical = 3;// 圖片初始位置 陣列 欄
-        var horizontal = 4;// 圖片初始位置 陣列 列
+        var vertical = 2;// 圖片初始位置 陣列 欄
+        var horizontal = 2;// 圖片初始位置 陣列 列
         var map_vertical = 0;
         var map_horizontal = 0;
+        var show_map_vertical_length = 5;
+        var show_map_horizontal_length = 5;
+        //
         $(function () {
             $("#start").css("top", vertical * 100 + "px");// 圖片初始位置 陣列 欄
             $("#start").css("left", horizontal * 100 + "px");// 圖片初始位置 陣列 列
@@ -136,6 +159,7 @@
             $("#down").css("display", "none");
             $("#left").css("display", "none");
             $("#right").css("display", "none");
+            //
             switch (event.which) {
                 case 37:// 鍵盤 左按鍵
                     if (horizontal > 0) {
@@ -149,15 +173,26 @@
                             $("#left").css("left", horizontal * 100 + "px");
                             $("#right").css("left", horizontal * 100 + "px");
                             //
+                            // if (horizontal >= show_map_horizontal_length) {
                             map_horizontal += 1;
                             var map_h = map_horizontal * parseInt($("#map").css("padding-left"));
-                            $("#map").css("margin-left", map_h);
-                            console.log("m_h-> " + map_h);
+                            console.log("左");
+                            // console.log("h-> " + horizontal);
+                            // console.log("s-> " + show_map_horizontal_length);
+                            console.log("地圖-> " + map_h);
+                            var temp = horizontal - show_map_horizontal_length;
+                            // console.log("t-> " + temp);
+                            //&& temp <= 0
+                            if (map_h <= 0 && temp <= 0) {
+                                $("#map").css("margin-left", map_h);
+                            }
+
                         } else {
                             horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
                         //
-                        console.log(vertical + "," + horizontal);
+                        // console.log(vertical + "," + horizontal);
+                        console.log("_");
                     }
                     // 顯上左邊圖片
                     $("#left").css("display", "inline");
@@ -174,10 +209,18 @@
                             $("#left").css("top", vertical * 100 + "px");
                             $("#right").css("top", vertical * 100 + "px");
                             //
+                            console.log("vertical->" + vertical);
+                            // if(vertical >= show_map_vertical_length){
                             map_vertical += 1;
                             var map_v = map_vertical * parseInt($("#map").css("padding-top"));
-                            $("#map").css("margin-top", map_v);
-                            //
+                            var temp = vertical - show_map_vertical_length;
+
+                            if (map_v <= 0 && temp <= 0) {
+                                $("#map").css("margin-top", map_v);
+                            }
+                            console.log("photo_vertical " + vertical);
+                            console.log("map_vertical " + map_v);
+
                         } else {
                             vertical += 1;// 不能通行，將陣列向上移動。設為原來位置
                         }
@@ -201,14 +244,28 @@
                             //
                             map_horizontal -= 1;
                             var map_h = map_horizontal * parseInt($("#map").css("padding-left"));
-                            $("#map").css("margin-left", map_h);
+                            console.log("右");
+                            // console.log("h-> " + horizontal);
+                            // console.log("s-> " + show_map_horizontal_length);
+                            console.log("地圖-> " + map_h);
+
+                            var temp = horizontal - show_map_horizontal_length;
+                            // console.log("t-> " + temp);
+// && temp <= 0
+                            if (map_h <= 0 && temp <= 0) {
+                                $("#map").css("margin-left", map_h);
+                            }
+                            // console.log("photo_horizontal " + horizontal);
+                            // console.log("map_horizontal " + map_h);
                             //
 
                         } else {
                             horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
                         //
-                        console.log(vertical + "," + horizontal);
+                        // console.log(vertical + "," + horizontal);
+                        console.log("_");
+
                     }
                     // 顯上右邊圖片
                     $("#right").css("display", "inline");
@@ -229,9 +286,13 @@
                             //
                             map_vertical -= 1;
                             var map_v = map_vertical * parseInt($("#map").css("padding-top"));
-                            $("#map").css("margin-top", map_v);
-                            console.log("m_v-> " + map_v);
+                            var temp = vertical - show_map_vertical_length;
 
+                            if (map_v <= 0 && temp <= 0) {
+                                $("#map").css("margin-top", map_v);
+                            }
+                            console.log("photo_vertical " + vertical);
+                            console.log("map_vertical " + map_v);
                         } else {
                             vertical -= 1;// 不能通行，將陣列向下移動。設為原來位置
                         }
