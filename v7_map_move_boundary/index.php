@@ -141,11 +141,11 @@
         var horizontalLength = map[map.length - 1].length;// 列
         // alert(horizontalLength);
         var photo_vertical = 2;// 圖片初始位置 陣列 欄
-        var photo_horizontal = 2;// 圖片初始位置 陣列 列
+        var photo_horizontal = 1;// 圖片初始位置 陣列 列
         var map_vertical = 0;
         var map_horizontal = 0;
-        var show_map_vertical_length = 5;
-        var show_map_horizontal_length = 5;
+        var show_map_vertical_length = 6;
+        var show_map_horizontal_length = 7;
         //
         $(function () {
             $("#start").css("top", photo_vertical * 100 + "px");// 圖片初始位置 陣列 欄
@@ -179,12 +179,10 @@
 
         function right() {
             var map_padding = parseInt($("#map").css("padding-left"));
-            var show_map_padding = (show_map_horizontal_length ) * 100;
-            console.log(show_map_padding);
+            var show_map_padding = (show_map_horizontal_length) * 100;
             var right_length = (horizontalLength - show_map_horizontal_length) * 100;// 計算右邊需要遮住圖片寬度
-            console.log(map_padding + show_map_padding);
             $("#map_right").css("margin-left", map_padding + show_map_padding);
-            // $("#map_right").css("width", right_length);
+            $("#map_right").css("width", right_length);
         }
 
         function bottom() {
@@ -192,7 +190,7 @@
             var show_map_padding = show_map_vertical_length * 100;
             var top_length = (verticalLength - show_map_vertical_length) * 100;// 計算下邊需要遮住圖片寬度
             $("#map_bottom").css("margin-top", map_padding + show_map_padding);
-            // $("#map_bottom").css("height", top_length);
+            $("#map_bottom").css("height", top_length);
         }
 
         $(document).keydown(function (event) {
@@ -217,15 +215,16 @@
                             //
                             map_horizontal += 1;
                             var map_horizontal_move = map_horizontal * 100;
-                            var horizontal_range = photo_horizontal - show_map_horizontal_length;
-                            //
-                            if (map_horizontal_move <= 0 && horizontal_range <= 0) {
+                            var horizontal_range = horizontalLength - Math.abs(map_horizontal);
+
+                            if (map_horizontal <= 0 && horizontal_range >= show_map_horizontal_length) {
                                 $("#map").css("margin-left", map_horizontal_move);
                             }
                         } else {
                             photo_horizontal += 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
                     }
+                    console.log("++");
                     // 顯上左邊圖片
                     $("#left").css("display", "inline");
                     break;
@@ -244,9 +243,9 @@
                             map_vertical += 1;
                             // var map_v = map_vertical * parseInt($("#photo").css("height"));
                             var map_vertical_move = map_vertical * 100;
-                            var vertical_range = photo_vertical - show_map_vertical_length;
+                            var vertical_range = verticalLength - Math.abs(map_vertical);
 
-                            if (map_vertical_move <= 0 && vertical_range <= 0) {
+                            if (map_vertical_move <= 0 && vertical_range >= show_map_vertical_length) {
                                 $("#map").css("margin-top", map_vertical_move);
                             }
                         } else {
@@ -271,15 +270,16 @@
                             map_horizontal -= 1;
                             // var map_h = map_horizontal * parseInt($("#map").css("padding-left"));
                             var map_horizontal_move = map_horizontal * 100;
-                            var horizontal_range = photo_horizontal - show_map_horizontal_length;
+                            var horizontal_range = horizontalLength - Math.abs(map_horizontal);
                             //
-                            if (map_horizontal_move <= 0 && horizontal_range <= 0) {
+                            if (map_horizontal <= 0 && horizontal_range >= show_map_horizontal_length) {
                                 $("#map").css("margin-left", map_horizontal_move);
                             }
                         } else {
                             photo_horizontal -= 1;// 不能通行，將陣列向右移動。設為原來位置
                         }
                     }
+                    console.log("++");
                     // 顯上右邊圖片
                     $("#right").css("display", "inline");
                     break;
@@ -297,9 +297,9 @@
                             map_vertical -= 1;
                             // var map_v = map_vertical * parseInt($("#photo").css("height"));
                             var map_vertical_move = map_vertical * 100;
-                            var vertical_range = photo_vertical - show_map_vertical_length;
+                            var vertical_range = verticalLength - Math.abs(map_vertical);
 
-                            if (map_vertical_move <= 0 && vertical_range <= 0) {
+                            if (map_vertical_move <= 0 && vertical_range >= show_map_vertical_length) {
                                 $("#map").css("margin-top", map_vertical_move);
                             }
                         } else {
